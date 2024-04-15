@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
 		"you shouldnt rm -rf /",
 		"i could like memleak rn",
 		"hungry for your pcs resources",
-		"systemd/linux",
+		"ubuntu will speed up your pc, they said",
 		"one red",
 		"wiimote.local" // the best one
 	};
