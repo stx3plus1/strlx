@@ -8,6 +8,15 @@ strfetch prints a silly message along with your fetch, which can be default or c
 
 I may allow multiple from a config file soon, but then the point of strfetch will die, so maybe a bash rewrite with this?
 
+## Compile
+Compilation for OS X and Linux. 
+
+Requires a C compiler and basic headers. 
+
+`chmod +x build.command`
+
+`./build.command`
+
 ## Usage
 `strfetch "<string>"`
 
