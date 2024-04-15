@@ -1,9 +1,12 @@
 // a fetch made in neovim 
 // i added some comments to understand
+// i should have written this in bash, shouldnt i
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
+int str(char string);
 
 // get arguments, this is basic c
 int main(int argc, char **argv) {
@@ -26,9 +29,13 @@ int main(int argc, char **argv) {
 		"wiimote.local" // the best one
 	};
 	
+	printf(">host: ");
+	fflush(stdout);
+	system("uname -n");
+
 	// be random.
 	time_t randomiser;
-
+	
 	// did we get a custom message?
 	if (argc < 2) {
 		// no, use a default
@@ -42,7 +49,10 @@ int main(int argc, char **argv) {
 	system("uname -srm"); // kernel info
 	printf("[*] Memory: "); 
 	fflush(stdout); // flush again, god i hate c
-	// this monster cuts out the memory usage from /proc/meminfo then formats it to one line with a single shell command. disgusting.
-	system("echo $(cat /proc/meminfo | grep MemFree | cut -d ':' -f2 | awk '{$1=$1};1'; echo \"/\"; cat /proc/meminfo | grep MemTotal | cut -d ':' -f2 | awk '{$1=$1};1')");
-	return 0; // leave
+	#ifdef __linux__
+		system("echo $(free -m | awk '/^Mem:/{printf(\"%.0fMB\",$3)}'; echo /; free -m | awk '/^Mem:/{printf(\"%.0fMB\",$2)}')");
+	#elif __APPLE__ 
+		system("echo $(sysctl hw.memsize | cut -d ':' -f2 | awk '{$1=$1};1'; echo kB)");
+	#endif
+	return 0; 
 }
