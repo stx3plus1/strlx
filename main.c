@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-int str(char string);
-
 // get arguments, this is basic c
 int main(int argc, char **argv) {
 	// default messages!
@@ -52,7 +50,7 @@ int main(int argc, char **argv) {
 	#ifdef __linux__
 		system("echo $(free -m | awk '/^Mem:/{printf(\"%.0fMB\",$3)}'; echo /; free -m | awk '/^Mem:/{printf(\"%.0fMB\",$2)}')");
 	#elif __APPLE__ 
-		system("echo $(sysctl hw.memsize | cut -d ':' -f2 | awk '{$1=$1};1'; echo kB)");
+		system("echo $(echo $(( $(sysctl hw.memsize | cut -d ':' -f2 | awk '{$1=$1};1') / 1024 / 1024)); echo MB total)");
 	#endif
 	return 0; 
 }
