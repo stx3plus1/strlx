@@ -1,5 +1,5 @@
 // version
-#define VERSION "1.02"
+#define VERSION "1.01"
 
 // built in headers
 #include <stdio.h>
