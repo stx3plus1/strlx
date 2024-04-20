@@ -1,5 +1,5 @@
 // version
-#define VERSION "1.0"
+#define VERSION "1.01"
 
 // built in headers
 #include <stdio.h>
@@ -9,16 +9,15 @@
 #include <stdbool.h>
 #include <time.h>
 #include <sys/utsname.h>
+#include <sys/types.h>
 
 #ifdef __linux__
-	#include <sys/types.h>
 	#include <sys/stat.h>
 	#include <fcntl.h>
     #define LINUX
 #elif defined(__APPLE__)
-	#include <sys/types.h>
     #include <sys/sysctl.h>
-#	include <mach/mach.h>
+	#include <mach/mach.h>
     #define MACOS
 #endif
 
@@ -43,7 +42,7 @@ char strings[istrings][40] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-	"i run in 0.04 seconds",
+	"i run in 3ms",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
