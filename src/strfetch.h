@@ -11,11 +11,14 @@
 #include <sys/utsname.h>
 
 #ifdef __linux__
-	#include <time.h>
+	#include <sys/types.h>
+	#include <sys/stat.h>
+	#include <fcntl.h>
     #define LINUX
 #elif defined(__APPLE__)
 	#include <sys/types.h>
     #include <sys/sysctl.h>
+#	include <mach/mach.h>
     #define MACOS
 #endif
 
