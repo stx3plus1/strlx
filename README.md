@@ -17,7 +17,10 @@ Strings do not require quotes but using them if implementing strfetch into your 
 
 ## Compile/Install
 Compilation for macOS and Linux. 
-Install GCC, then:
+
+Remember to set CC to your compiler if you aren't using GCC, or clang aliased to "gcc" (Apple...)
+
+Make sure a good C compiler and sufficient headers are installed, then:
 
 `make && sudo make install`
 
