@@ -1,5 +1,28 @@
-#define VERSION "0.3"
+// version
+#define VERSION "1.0"
 
+// built in headers
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <stdbool.h>
+#include <time.h>
+#include <sys/utsname.h>
+
+#ifdef __linux__
+	#include <time.h>
+    #define LINUX
+#elif defined(__APPLE__)
+	#include <sys/types.h>
+    #include <sys/sysctl.h>
+    #define MACOS
+#endif
+
+// uname
+struct utsname kernel;
+
+// strings
 char strings[20][40] = {
 	"i wonder what this button does",
 	"the world will end one day",
