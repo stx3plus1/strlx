@@ -1,2 +1,2 @@
-gcc main.c -o strfetch
+gcc strfetch.c -o strfetch
 strip strfetch
