@@ -19,6 +19,6 @@ Strings do not require quotes but using them if implementing strfetch into your 
 Compilation for macOS and Linux. 
 Install GCC, then:
 
-`make && sudo make install `
+`make && sudo make install`
 
 to compile then add strfetch to /usr/local/bin. If your shell doesn't have it in PATH, add it!
