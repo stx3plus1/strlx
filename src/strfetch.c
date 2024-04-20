@@ -2,18 +2,16 @@
 // by cirkulx also known as stx3plus1 or stx4
 
 // you may distribute and modify this code provided you give credit
-// i worked on this (maybe not hard it took a long time and a chatbot)
+// i worked on this, 100%s
 
 // contains definitions and includes for other headers, required
 #include "strfetch.h"
-
-// ~~thanks chatgpt i couldnt get this obviously~~
+//uptime 
 bool get_system_uptime(long *uptime_seconds) {
 #ifdef LINUX
     FILE *file = fopen("/proc/uptime", "r");
     if (file == NULL)
         return false;
-
     double uptime;
     if (fscanf(file, "%lf", &uptime) != 1) {
         fclose(file);
@@ -30,22 +28,18 @@ bool get_system_uptime(long *uptime_seconds) {
     size_t length = sizeof(boottime);
     if (sysctl(mib, 2, &boottime, &length, NULL, 0) < 0)
         return false;
-
     struct timeval now;
     gettimeofday(&now, NULL);
-
     *uptime_seconds = now.tv_sec - boottime.tv_sec;
     return true;
 #else
     return false;
 #endif
 }
-
 void format_uptime(long uptime_seconds) {
     int days = uptime_seconds / (60 * 60 * 24);
     int hours = (uptime_seconds % (60 * 60 * 24)) / (60 * 60);
     int minutes = (uptime_seconds % (60 * 60)) / 60;
-
     printf("[*] Uptime: ");
     if (days > 0) {
 		printf("%dd ", days);
@@ -55,39 +49,41 @@ void format_uptime(long uptime_seconds) {
     }
 	printf("%dm\n", minutes);
 }
-
 int main(int argc, char **argv) {
 	// random strings
 	time_t randomiser;
-	
-	// get *some* info
+	// get info for some strings
 	uname(&kernel);
-
 	if (argc < 2) {
 		srand((unsigned) time(&randomiser));
-		printf("[!] %s\n", strings[rand() % 20]);
+		printf("[!] %s\n", strings[rand() % istrings]);
 	} else {
-		printf("[!] %s\n", argv[1]);
+		printf("[!] ");
+		int i;
+		for( i=1; i<argc; i++ ) {
+        	printf("%s ", argv[i]);
+		}
+		printf("\n");
 	}
 	// hostname
 	printf("[&] Host: %s\n", kernel.nodename);
-
 	// kernel version
 	printf("[*] Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
-	
 	// uptime
 	long uptime_seconds = 0;
 	if (get_system_uptime(&uptime_seconds)) {
         format_uptime(uptime_seconds);
     }
-
+	// memory (awkward as heck)
 	printf("[*] Memory: "); 
 	fflush(stdout);
 	#ifdef LINUX
 		system("echo $(free -m | awk '/^Mem:/{printf(\"%.0fMB\",$3)}'; echo \" /\"; free -m | awk '/^Mem:/{printf(\"%.0fMB\",$2)}')");
-    #else
+    #elif defined (MACOS)
+		printf("macOS moment\n");
+	#else
 		printf("!!! Unknown !!!\n");
 	#endif
-
+	// exit
 	return 0; 
 }

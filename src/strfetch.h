@@ -23,7 +23,8 @@
 struct utsname kernel;
 
 // strings
-char strings[20][40] = {
+#define istrings 20
+char strings[istrings][40] = {
 	"i wonder what this button does",
 	"the world will end one day",
 	"time for your psu to blow up",
