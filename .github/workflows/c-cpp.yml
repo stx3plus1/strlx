@@ -16,9 +16,10 @@ jobs:
     - name: compile
       run: make
     - name: get artifacts
-      uses: actions/download-artifact@v4
+    - uses: actions/upload-artifact@v2
       with:
-        name: build/strfetch
+        path: build/strfetch
+        name: strfetch-linux
   
   build-osx:
   
@@ -29,6 +30,7 @@ jobs:
       - name: compile
         run: make
       - name: get artifacts
-        uses: actions/download-artifact@v4
+      - uses: actions/upload-artifact@v2
         with:
-          name: build/strfetch
+          path: build/strfetch
+          name: strfetch-macos
