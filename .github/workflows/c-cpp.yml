@@ -7,11 +7,28 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build-linux:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
-    - name: make
+    - name: compile
       run: make
+    - name: get artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: build/strfetch
+  
+  build-osx:
+  
+      runs-on: macOS-latest
+  
+      steps:
+      - uses: actions/checkout@v3
+      - name: compile
+        run: make
+      - name: get artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build/strfetch
