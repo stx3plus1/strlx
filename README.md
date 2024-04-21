@@ -17,12 +17,26 @@ strfetch will display your string as an alert in the fetch on the first line. If
 
 Strings do not require quotes but using them if implementing strfetch into your shell, for example, is good practice. 
 
-## Compile/Install
+## Installation
+
+There are 2 methods for installation - compiling manually, or grabbing the latest build from Actions.
+
+It is recommended to grab from Actions if you don't feel like compiling, but compiling is the better option sometimes.
+
+Head over to [Actions](https://github.com/stx3plus1/strfetch/actions/workflows/c-cpp.yml) and grab the lastest artifact...
+
+then find the file, and run `chmod +x <drag the file into your terminal>` to mark it as executable.
+
+Then, `./strfetch` should work, and you can install it properly by copying it to /usr/local/bin (`sudo cp strfetch /usr/local/bin` for the few who don't know how)
+
+This is only suggested when you don't have a compiler, nor do you want one taking up storage. Compiling makes it a lot easier to install.
+ 
+## Compile
 Compilation for macOS and Linux. 
 
-Remember to set CC to your compiler if you aren't using GCC, or clang aliased to "gcc" (Apple...)
+Remember to set CC to your compiler if you aren't using gcc, or clang aliased to "gcc" (Apple...)
 
-Make sure a good C compiler and sufficient headers are installed, then:
+Make sure a good C compiler (gcc, clang, etc..) and sufficient headers are installed, then:
 
 `make && sudo make install`
 
