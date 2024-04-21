@@ -36,5 +36,6 @@ int main(int argc, char **argv) {
     printf("\x1b[35m[*] Memory: ");
 	get_memory_info();
 	// exit
+    printf("\x1b[0m"); // 1.1 broke people's shells.
 	return 0; 
 }
