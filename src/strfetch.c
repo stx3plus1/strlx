@@ -18,7 +18,7 @@ int main(int argc, char **argv) {
 		printf("[!] ");
 		int i;
 		for( i=1; i<argc; i++ ) {
-        	printf("%s ", argv[i]);
+        	printf("\x1b[31m%s ", argv[i]);
 		}
 		printf("\n");
 	}
