@@ -1,5 +1,5 @@
 // version
-#define VERSION "1.01"
+#define VERSION "1.1"
 
 // built in headers
 #include <stdio.h>
@@ -12,21 +12,22 @@
 #include <sys/types.h>
 
 #ifdef __linux__
-	#include <sys/stat.h>
-	#include <fcntl.h>
     #define LINUX
 #elif defined(__APPLE__)
-    #include <sys/sysctl.h>
-	#include <mach/mach.h>
+	#include <sys/sysctl.h>
     #define MACOS
 #endif
+
+// strfetch info functions
+#include "func.h"
 
 // uname
 struct utsname kernel;
 
 // strings
 #define istrings 20
-char strings[istrings][40] = {
+// istrings = number of strings in the array
+char strings[istrings][128] = {
 	"i wonder what this button does",
 	"the world will end one day",
 	"time for your psu to blow up",
@@ -46,5 +47,5 @@ char strings[istrings][40] = {
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
-	"*** Stop. ***"
+	"make: *** No rule to make target `src/func.c', needed by `strfetch'. Stop."
 };
