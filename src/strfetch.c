@@ -15,10 +15,10 @@ int main(int argc, char **argv) {
 		srand((unsigned) time(&randomiser));
 		printf("\x1b[31m[!] %s\n", strings[rand() % istrings]);
 	} else {
-		printf("[!] ");
+		printf("\x1b[31m[!] ");
 		int i;
 		for( i=1; i<argc; i++ ) {
-        	printf("\x1b[31m%s ", argv[i]);
+        	printf("%s ", argv[i]);
 		}
 		printf("\n");
 	}
