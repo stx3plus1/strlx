@@ -95,7 +95,7 @@ void get_memory_info() {
         }
     }
     fclose(file);
-    printf("%.2fMB / %.2fMB\n", (double)(total_memory - free_memory) / 1024 / 1024, (double)total_memory / 1024 / 1024);
+    printf("%.2fGB / %.2fGB\n", (double)(total_memory - free_memory) / 1024 / 1024, (double)total_memory / 1024 / 1024);
     #else
     printf("Unsupported");
     #endif
