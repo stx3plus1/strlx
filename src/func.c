@@ -7,6 +7,7 @@
 // headers we don't have due to separate files
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 
 #ifdef __linux__
 	#include <sys/stat.h>
