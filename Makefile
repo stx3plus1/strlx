@@ -9,8 +9,8 @@ strfetch: $(SRC)/strfetch.c $(SRC)/func.c
 	strip $(BUILD)/$@
 
 install: $(BUILD)/strfetch
-	mkdir -p /usr/local/bin
-	cp $< /usr/local/bin/ 
+	@mkdir -p /usr/local/bin
+	@cp $< /usr/local/bin/ 
 
 clean: 
 	rm -rf build/
