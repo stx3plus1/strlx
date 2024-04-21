@@ -1,7 +1,7 @@
 SRC=src
 BUILD=build
 CC=gcc
-CFLAGS=-std=c99 -Wimplicit-function-declaration -Wbuiltin-declaration-mismatch
+CFLAGS=-std=c99
 
 strfetch: $(SRC)/strfetch.c $(SRC)/func.c
 	mkdir -p $(BUILD)
