@@ -2,11 +2,13 @@
 A minimal, fun fetch in plain C.
 
 ## Basics
-![image](github/strfetch.png)
+![image](.github/strfetch.png)
 
 strfetch prints a silly message along with your fetch, which can be default or custom.
 
-A config file with custom strings is on the to-do list. (1.2?)
+"str" in strfetch stands for "string" - so of course we need a string
+
+A config file with custom strings is on the to-do list. (2.0?)
 
 ASCII art like neofetch may be added, likely custom and in the same config file.
 
