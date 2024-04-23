@@ -5,7 +5,7 @@
 // i worked on this, 100%
 
 // version
-#define VERSION "1.1"
+#define VERSION "1.2"
 
 // built in headers
 #include <stdio.h>
@@ -20,12 +20,20 @@
 #ifdef __linux__
     #define LINUX
 #elif defined(__APPLE__)
-	#include <sys/sysctl.h>
+    #include <sys/sysctl.h>
     #define MACOS
 #endif
 
 // strfetch info functions
 #include "func.h"
+
+// get user
+char homedir[64];
+
+// color
+FILE* COLS;
+int color = 0;
+char word[32];
 
 // uname
 struct utsname kernel;
@@ -49,7 +57,7 @@ char strings[istrings][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-	"i (can) run in 200μs",
+	"i (can) run in 200Î¼s",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
