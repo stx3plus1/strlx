@@ -45,7 +45,7 @@ int main(int argc, char **argv) {
 	// color on/off
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
-		system("mktodir -p ~/.config/strfetch/");
+		system("mkdir -p ~/.config/strfetch/");
 	        pstrings(argc, argv);
 		hostname();
 		kernel_ver();
