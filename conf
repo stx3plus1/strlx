@@ -1,0 +1,21 @@
+// (default) strfetch config
+// color
+true
+
+// order
+red
+string
+
+yellow
+hostname
+
+greenw
+kernel
+
+blue
+uptime
+
+purple
+memory
+
+quit
