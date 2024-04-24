@@ -8,9 +8,7 @@ strfetch prints a silly message along with your fetch, which can be default or c
 
 "str" in strfetch stands for "string" - so of course we need a string
 
-A config file with custom strings is on the to-do list. (2.0?)
-
-ASCII art like neofetch may be added, likely custom and in the same config file.
+Version 1.2 has added a configuration file, which allows you to pick colors and where to place your fetch items.
 
 ## Usage
 `strfetch <string>`
@@ -31,6 +29,10 @@ then find the file, and run `chmod +x <drag the file into your terminal>` to mar
 
 Then, `./strfetch` should work, and you can install it properly by copying it to /usr/local/bin (`sudo cp strfetch /usr/local/bin` for the few who don't know how)
 
+Copy the configuration file to ~/.config/strfetch/conf, if you want to configure.
+
+Makefile does this automatically, so compilation is suggested.
+
 This is only suggested when you don't have a compiler, nor do you want one taking up storage. Compiling makes it a lot easier to install.
  
 ## Compile
@@ -43,3 +45,23 @@ Make sure a good C compiler (gcc, clang, etc..) and sufficient headers are insta
 `make && sudo make install`
 
 to compile then add strfetch to /usr/local/bin. If your shell doesn't have it in PATH, add it!
+
+## Configuration
+
+The config file is placed locally to each user.
+
+It is located at `~/.config/strfetch/conf`, where ~ is the home directory.
+
+The file works like this:
+
+Comments are defined with `//`. The file will define `true` or `false` on any line to define if color is printed or not.
+
+Colors are defined with their English names, before the fetch option. Colors do not have to be repeated for each item.
+
+Valid colors are: red, yellow, green, blue, purple.
+
+The fetch items are defined on their own INDIVIDUAL lines.
+
+Valid fetch items are: string, hostname, kernel, uptime, memory.
+
+Read the default config file for more information on syntax. 
