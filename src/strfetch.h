@@ -27,11 +27,9 @@
 // strfetch info functions
 #include "func.h"
 
-// get user
-char homedir[64];
-
-// color
-FILE* COLS;
+// configuration file
+int i;
+FILE* CONFIG;
 int color = 0;
 char word[32];
 
@@ -57,7 +55,7 @@ char strings[istrings][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-	"i (can) run in 200Î¼s",
+	"i (can) run in 200ÃÂ¼s",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
