@@ -52,13 +52,14 @@ int main(int argc, char **argv) {
 			printf("strfetch %s\nBy cirkulx.\n", VERSION);
 			return 0;
 		}
-		if (strcmp(argv[1], "-u") || strcmp(argv[1], "--help") || strcmp(argv[1], "--usage") == 0) {
+		if (strstr(argv[1], "-u") || strstr(argv[1], "--help") || strstr(argv[1], "--usage")) {
 			printf("Usage: strfetch \"[your string here]\"\n");
 			printf("strfetch is a simple C fetch application for getting system stats.\n");
 			pstrings(argc, 1, argv);
 			return 0;
 		}
 	}
+	
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
