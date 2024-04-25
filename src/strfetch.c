@@ -42,24 +42,29 @@ void memory() {
 
 int main(int argc, char **argv) {
 	uname(&kernel);
-	// color on/off
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
-	    system("mkdir -p ~/.config/strfetch/");
 	    pstrings(argc, argv);
 	    hostname();
 	    kernel_ver();
 	    uptime();
 	    memory();
-            return(0);
+        return 0;
 	} else {
 	    while(fscanf(CONFIG, "%s", word) != EOF) { 
-            if (strcmp(word, "true")) {
-	        	color = 1;
-			} else {
-		    	color = 0;
-	    	}
+            if (strstr(word, "true")) {
+				color = 1;
+			}
+			if (strstr(word, "false")) {
+				color = 0;
+			}
 	        if (color == 1) {
+				if (strstr(word, "white")) {
+					printf("\x1b[37m");
+				}
+				if (strstr(word, "black")) {
+					printf("\x1b[30m");
+				}
 				if (strstr(word, "red")) {
 					printf("\x1b[31m");
 				} 
@@ -72,23 +77,26 @@ int main(int argc, char **argv) {
 				if (strstr(word, "blue")) {
 					printf("\x1b[34m");
 				} 
+				if (strstr(word, "cyan")) {
+					printf("\x1b[36m");
+				}
 				if (strstr(word, "purple")) {
 					printf("\x1b[35m");
 				}
 			}
-			if(strcmp(word, "string") == 0) { 
+			if(strstr(word, "string")) { 
 				pstrings(argc, argv);
 			}
-			if(strcmp(word, "hostname") == 0) { 
+			if(strstr(word, "hostname")) { 
 				hostname();
 			}
-			if(strcmp(word, "kernel") == 0) { 
-					kernel_ver(); 
+			if(strstr(word, "kernel")) { 
+				kernel_ver(); 
 			}
-			if(strcmp(word, "uptime") == 0) { 
+			if(strstr(word, "uptime")) { 
 				uptime();
 			}
-			if(strcmp(word, "memory") == 0) { 
+			if(strstr(word, "memory")) { 
 				memory();
 			}
 	    } 

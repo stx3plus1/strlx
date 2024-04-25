@@ -1,19 +1,9 @@
 // (default) strfetch config
-// color
-true
+color, true
 
 // order
-red
-string
-
-yellow
-hostname
-
-green
-kernel
-
-blue
-uptime
-
-purple
-memory
+red, string
+yellow, hostname
+green, kernel
+cyan, uptime
+blue, memory

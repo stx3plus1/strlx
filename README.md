@@ -58,9 +58,9 @@ Comments are defined with `//`. The file will define `true` or `false` on any li
 
 Colors are defined with their English names, before the fetch option. Colors do not have to be repeated for each item.
 
-Valid colors are: red, yellow, green, blue, purple.
+Valid colors are: white, black, red, yellow, green, cyan, blue, purple.
 
-The fetch items are defined on their own INDIVIDUAL lines.
+The fetch items are defined after color options or on a separate line.
 
 Valid fetch items are: string, hostname, kernel, uptime, memory.
 
