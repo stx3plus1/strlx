@@ -1,5 +1,5 @@
 // (default) strfetch config
-color, true
+color=true
 
 // order
 red, string

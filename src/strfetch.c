@@ -52,11 +52,13 @@ int main(int argc, char **argv) {
         return 0;
 	} else {
 	    while(fscanf(CONFIG, "%s", word) != EOF) { 
-            if (strstr(word, "true")) {
-				color = 1;
-			}
-			if (strstr(word, "false")) {
-				color = 0;
+			if (strstr(word, "color=")) {
+				if (strstr(word, "true")) {
+					color = 1;
+				}
+				if (strstr(word, "false")) {
+					color = 0;
+				}
 			}
 	        if (color == 1) {
 				if (strstr(word, "white")) {
