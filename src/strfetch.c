@@ -47,15 +47,17 @@ void memory() {
 }
 
 int main(int argc, char **argv) {
-	if (strcmp(argv[1], "--version") == 0) {
-		printf("strfetch %s\nBy cirkulx.\n", VERSION);
-		return 0;
-	}
-	if (strcmp(argv[1], "-u") || strcmp(argv[1], "--help") || strcmp(argv[1], "--usage") == 0) {
-		printf("Usage: strfetch \"<your string here>\"\n");
-		printf("strfetch is a simple C fetch application for getting system stats.\n");
-		pstrings(argc, 1, argv);
-		return 0;
+	if (argc > 2) {
+		if (strcmp(argv[1], "--version") == 0) {
+			printf("strfetch %s\nBy cirkulx.\n", VERSION);
+			return 0;
+		}
+		if (strcmp(argv[1], "-u") || strcmp(argv[1], "--help") || strcmp(argv[1], "--usage") == 0) {
+			printf("Usage: strfetch \"[your string here]\"\n");
+			printf("strfetch is a simple C fetch application for getting system stats.\n");
+			pstrings(argc, 1, argv);
+			return 0;
+		}
 	}
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
