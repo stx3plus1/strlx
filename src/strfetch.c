@@ -7,19 +7,25 @@
 // contains definitions and includes for other headers, required
 #include "strfetch.h"
 
-void pstrings(int count, char **value) {
-	if (count < 2) {
-            time_t randomiser;
-            srand((unsigned) time(&randomiser));
-	    printf("[!] %s\n", strings[rand() % istrings]);
+void pstrings(int count, int type, char **value) {
+	if (type == 1) {
+		time_t randomiser;
+        srand((unsigned) time(&randomiser));
+	    printf("...%s\n", strings[rand() % istrings]);
 	} else {
-	    printf("[!] ");
-	    i = 0;
-		while (i < (count - 1)) {
-		    i++;
-		    printf("%s ", value[i]);
+		if (count < 2) {
+			time_t randomiser;
+			srand((unsigned) time(&randomiser));
+			printf("[!] %s\n", strings[rand() % istrings]);
+		} else {
+			printf("[!] ");
+			i = 0;
+			while (i < (count - 1)) {
+				i++;
+				printf("%s ", value[i]);
+			}
+				printf("\n");
 		}
-            printf("\n");
 	}
 }
 void hostname() {
@@ -41,10 +47,20 @@ void memory() {
 }
 
 int main(int argc, char **argv) {
+	if (strcmp(argv[1], "--version") == 0) {
+		printf("strfetch %s\nBy cirkulx.\n", VERSION);
+		return 0;
+	}
+	if (strcmp(argv[1], "-u") || strcmp(argv[1], "--help") || strcmp(argv[1], "--usage") == 0) {
+		printf("Usage: strfetch \"<your string here>\"\n");
+		printf("strfetch is a simple C fetch application for getting system stats.\n");
+		pstrings(argc, 1, argv);
+		return 0;
+	}
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
-	    pstrings(argc, argv);
+	    pstrings(argc, 0, argv);
 	    hostname();
 	    kernel_ver();
 	    uptime();
@@ -87,7 +103,7 @@ int main(int argc, char **argv) {
 				}
 			}
 			if(strstr(word, "string")) { 
-				pstrings(argc, argv);
+				pstrings(argc, 0, argv);
 			}
 			if(strstr(word, "hostname")) { 
 				hostname();
