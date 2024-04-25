@@ -47,7 +47,7 @@ void memory() {
 }
 
 int main(int argc, char **argv) {
-	if (argc > 2) {
+	if (argc > 1) {
 		if (strcmp(argv[1], "--version") == 0) {
 			printf("strfetch %s\nBy cirkulx.\n", VERSION);
 			return 0;
