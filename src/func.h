@@ -1,4 +1,4 @@
-// strfetch 1.2
+// strfetch 
 // by cirkulx also known as stx3plus1 or stx4
 
 // you may distribute and modify this code provided you give credit
