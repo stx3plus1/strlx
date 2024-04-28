@@ -42,7 +42,7 @@ Remember to set CC to your compiler if you aren't using gcc, or clang aliased to
 
 Make sure a good C compiler (gcc, clang, etc..) and sufficient headers are installed, then:
 
-`make && sudo make install`
+`make && sudo make install && make install-config`
 
 to compile then add strfetch to /usr/local/bin. If your shell doesn't have it in PATH, add it!
 
