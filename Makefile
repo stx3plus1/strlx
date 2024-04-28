@@ -15,9 +15,12 @@ install: $(BUILD)/strfetch
 	@echo Installing...
 	@mkdir -p /usr/local/bin
 	@cp $< /usr/local/bin/
+	@echo Done!
+
+install-config: conf
 	@echo Installing configuration file...
-	@mkdir -p $(USERDIR)/.config/strfetch/
-	@cp conf $(USERDIR)/.config/strfetch/conf
+	@mkdir -p $(USERDIR)/.config/strfetch
+	@cp conf $(USERDIR)/.config/strfetch/
 	@echo Done!
 
 clean: 
