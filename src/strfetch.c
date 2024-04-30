@@ -28,6 +28,22 @@ void pstrings(int count, int type, char **value) {
 		}
 	}
 }
+void os() {
+	printf("[*] OS: ");
+	osrelease = fopen("/etc/os-release", "r");
+	if (!osrelease) {
+		printf("Unix-like\n");
+		return; 
+	}
+	while (fgets(osline, 128, osrelease)) {
+		if (strstr(osline, "PRETTY_NAME")) {
+			char* distro = strtok(osline, "\"");
+			distro = strtok(NULL, "\"");
+			printf("%s\n", distro);
+			return; 
+		}
+	}
+}
 void hostname() {
 	printf("[&] Host: %s\n", kernel.nodename);
 }
@@ -68,6 +84,7 @@ int main(int argc, char **argv) {
 	if (!CONFIG) {
 		printf("Could not find or create a config.\n");
 		pstrings(argc, 0, argv);
+		os();
 		hostname();
 		kernel_ver();
 		shell();
@@ -110,8 +127,14 @@ int main(int argc, char **argv) {
 					printf("\x1b[35m");
 				}
 			}
+			if(strstr(word, "bold")) {
+				printf("\x1b[1m");
+			}
 			if(strstr(word, "string")) { 
 				pstrings(argc, 0, argv);
+			}
+			if(strstr(word, "distro")) {
+				os();
 			}
 			if(strstr(word, "hostname")) { 
 				hostname();
@@ -127,6 +150,9 @@ int main(int argc, char **argv) {
 			}
 			if(strstr(word, "memory")) { 
 				memory();
+			}
+			if(strstr(word, "reset")) {
+				printf("\x1b[0m");
 			}
 		} 
  	} 
