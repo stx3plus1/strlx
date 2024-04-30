@@ -2,7 +2,9 @@
 color=true
 
 // order
-red, string
+bold, string
+reset
+red, distro
 yellow, hostname
 green, shell
 cyan, kernel
