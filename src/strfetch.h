@@ -35,7 +35,7 @@ char word[32];
 
 // os
 FILE* osrelease;
-char osline[64];
+char osline[256];
 
 // uname
 struct utsname kernel;
