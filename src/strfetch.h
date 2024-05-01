@@ -17,7 +17,7 @@
 #include <sys/utsname.h>
 #include <sys/types.h>
 
-#ifdef __linux__ || defined(__GNU__)
+#if defined(__linux__)|| defined(__GNU__)
     #define LINUX
 #elif defined(__APPLE__)
     #include <sys/sysctl.h>
