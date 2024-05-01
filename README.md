@@ -36,7 +36,7 @@ Makefile does this automatically, so compilation is suggested.
 This is only suggested when you don't have a compiler, nor do you want one taking up storage. Compiling makes it a lot easier to install.
  
 ## Compile
-Compilation for macOS and Linux. 
+Compilation for macOS, Linux and GNU/Hurd. 
 
 Remember to set CC to your compiler if you aren't using gcc, or clang aliased to "gcc" (Apple...)
 
