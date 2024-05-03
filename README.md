@@ -2,7 +2,7 @@
 A minimal, fun fetch in plain C.
 
 ## Basics
-![image](.github/strfetch.png)
+![image](.github/strfetch.jpg)
 
 strfetch prints a silly message along with your fetch, which can be default or custom.
 
