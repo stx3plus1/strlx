@@ -59,7 +59,7 @@ char strings[istrings][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-	"i (can) run in 200Âµs",
+    "dd if=/dev/zero of=/dev/sda",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
