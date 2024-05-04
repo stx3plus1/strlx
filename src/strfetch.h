@@ -5,7 +5,7 @@
 // i worked on this, 100%
 
 // version
-#define VERSION "1.4"
+#define VERSION "1.4-1 Beta 2"
 
 // built in headers
 #include <stdio.h>
@@ -26,6 +26,7 @@
 
 // strfetch info functions
 #include "func.h"
+#include "ascii.h"
 
 // configuration file
 int i;
