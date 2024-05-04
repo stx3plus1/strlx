@@ -1,4 +1,4 @@
-char ascii[6][32] {
+char ascii[6][32] = {
 	"ascii_1 ",
 	"ascii_2 ", 
 	"ascii_3 ",
