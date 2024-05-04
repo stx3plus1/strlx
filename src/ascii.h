@@ -5,4 +5,4 @@ char ascii[6][32] = {
 	"ascii_4 ",
 	"ascii_5 ",
 	"ascii_6 "
-}
+};
