@@ -29,10 +29,10 @@ void pstrings(int count, int type, char **value) {
 	}
 }
 void os() {
-	printf("[*] OS: ");
+	printf("[*] OS:     ");
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
-		printf("Unix-like\n");
+		printf("%s %s OS\n", kernel.sysname, kernel.release);
 		return; 
 	}
 	while (fgets(osline, 128, osrelease)) {
@@ -45,13 +45,18 @@ void os() {
 	}
 }
 void hostname() {
-	printf("[&] Host: %s\n", kernel.nodename);
+	printf("[&] Host:   %s\n", kernel.nodename);
 }
 void kernel_ver() {
 	printf("[*] Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
 }
 void shell() {
-	printf("[*] Shell: %s\n", getenv("SHELL"));
+	printf("[*] Shell:  %s\n", getenv("SHELL"));
+}
+void cores() {
+	printf("[*] Cores:  ");
+	fflush(stdout);
+	system("nproc");
 }
 void uptime() {
 	long uptime_seconds = 0;
@@ -86,12 +91,15 @@ int main(int argc, char **argv) {
 		pstrings(argc, 0, argv);
 		os();
 		hostname();
-		kernel_ver();
 		shell();
+		kernel_ver();
+		cores();
 		uptime();
 		memory();
 		return 0;
 	} else {
+		int loop = 0;
+		int detect = 0;
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
 			if (strstr(word, "color=")) {
 				if (strstr(word, "true")) {
@@ -103,18 +111,27 @@ int main(int argc, char **argv) {
 			}
 			if (color == 1) {
 				if (strstr(word, "white")) {
+					detect = 1;
 					printf("\x1b[37m");
 				}
 				if (strstr(word, "black")) {
+					detect = 1;
 					printf("\x1b[30m");
 				}
+				if (strstr(word, "dr")) {
+					detect = 1;
+					printf("\x1b[38;5;9m");
+				}
 				if (strstr(word, "red")) {
+					detect = 1;
 					printf("\x1b[31m");
-				} 
+				}
 				if (strstr(word, "yellow")) {
+					detect = 1;
 					printf("\x1b[33m");
 				} 
 				if (strstr(word, "green")) {
+					detect = 1;
 					printf("\x1b[32m");
 				} 
 				if (strstr(word, "blue")) {
@@ -144,6 +161,9 @@ int main(int argc, char **argv) {
 			}
 			if(strstr(word, "shell")) { 
 				shell(); 
+			}
+			if(strstr(word, "cores")) {
+				cores();
 			}
 			if(strstr(word, "uptime")) { 
 				uptime();
