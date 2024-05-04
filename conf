@@ -4,9 +4,10 @@ color=true
 // order
 bold, string
 reset
-red, distro
-yellow, hostname
-green, shell
-cyan, kernel
+dr, distro
+red, hostname
+yellow, shell
+green, kernel
+cyan, cores
 blue, uptime
 purple, memory
