@@ -85,7 +85,7 @@ void get_memory_info() {
     }
     natural_t mem_used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pagesize;
     int64_t free_memory = physical_memory - mem_used;
-    printf("%.2fGB / %.2fGB\n", (double)mem_used / (1024 * 1024) / 1024, (double)physical_memory / (1024 * 1024) / 1024) /;
+    printf("%.2fGB / %.2fGB\n", (double)mem_used / (1024 * 1024) / 1024, (double)physical_memory / (1024 * 1024) / 1024);
     #elif defined(__linux__) || defined(__GNU__)
     FILE *file = fopen("/proc/meminfo", "r");
     if (!file) {
