@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <math.h>
 
 #ifdef __linux__
 	#include <sys/stat.h>
@@ -84,7 +85,7 @@ void get_memory_info() {
     }
     natural_t mem_used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pagesize;
     int64_t free_memory = physical_memory - mem_used;
-    printf("%.2fGB / %.2fGB\n", (double)mem_used / (1024 * 1024) / 1024, (double)physical_memory / (1024 * 1024) / 1024);
+    printf("%.2fGB / %.2fGB\n", (double)mem_used / (1024 * 1024) / 1024, (double)physical_memory / (1024 * 1024) / 1024) /;
     #elif defined(__linux__) || defined(__GNU__)
     FILE *file = fopen("/proc/meminfo", "r");
     if (!file) {
@@ -97,8 +98,8 @@ void get_memory_info() {
     while (fgets(line, sizeof(line), file)) {
         if (strncmp(line, "MemTotal:", 9) == 0) {
             sscanf(line + 9, "%d", &total_memory);
-        } else if (strncmp(line, "MemFree:", 8) == 0) {
-            sscanf(line + 8, "%d", &free_memory);
+        } else if (strncmp(line, "MemAvailable:", 8) == 0) {
+            sscanf(line + 13, "%d", &free_memory);
         }
     }
     fclose(file);
