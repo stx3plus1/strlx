@@ -98,10 +98,25 @@ int main(int argc, char **argv) {
 		memory();
 		return 0;
 	} else {
-		int loop = 0;
-		int detect = 0;
+		int ascline = 0;
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
-			if (strstr(word, "color=")) {
+			if (strstr(word, "inf")) {
+				ascline++;
+				if (ascline >= ascii_ln) {
+						#ifdef LINUX
+						printf("%s", ascii_tux[0]);	
+						#elif defined (MACOS)
+						printf("%s", ascii_apple[0]);	
+						#endif
+				} else {
+					#ifdef LINUX
+					printf("\x1b[0m%s", ascii_tux[ascline]);
+					#elif defined (MACOS)
+					printf("\x1b[0m%s", ascii_apple[ascline]);
+					#endif
+				}
+			}
+			if (strstr(word, "color-")) {
 				if (strstr(word, "true")) {
 					color = 1;
 				}
@@ -111,27 +126,21 @@ int main(int argc, char **argv) {
 			}
 			if (color == 1) {
 				if (strstr(word, "white")) {
-					detect = 1;
 					printf("\x1b[37m");
 				}
 				if (strstr(word, "black")) {
-					detect = 1;
-					printf("\x1b[30m");
+					printf("");
 				}
 				if (strstr(word, "dr")) {
-					detect = 1;
 					printf("\x1b[38;5;9m");
 				}
 				if (strstr(word, "red")) {
-					detect = 1;
 					printf("\x1b[31m");
 				}
 				if (strstr(word, "yellow")) {
-					detect = 1;
 					printf("\x1b[33m");
 				} 
 				if (strstr(word, "green")) {
-					detect = 1;
 					printf("\x1b[32m");
 				} 
 				if (strstr(word, "blue")) {

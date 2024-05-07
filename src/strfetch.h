@@ -5,7 +5,7 @@
 // i worked on this, 100%
 
 // version
-#define VERSION "1.4-1 Beta 2"
+#define VERSION "1.5"
 
 // built in headers
 #include <stdio.h>

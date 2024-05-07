@@ -10,6 +10,8 @@ strfetch prints a silly message along with your fetch, which can be default or c
 
 Version 1.2 has added a configuration file, which allows you to pick colors and where to place your fetch items.
 
+No. Windows is not supported.
+
 ## Usage
 `strfetch <string>`
 

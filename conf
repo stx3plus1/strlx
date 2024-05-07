@@ -1,13 +1,16 @@
 // (default) strfetch config
-color=true
+color-true
+
+// ascii type
+// coming next release, im tired
 
 // order
-bold, string
+inf, bold, string
 reset
-dr, distro
-red, hostname
-yellow, shell
-green, kernel
-cyan, cores
-blue, uptime
-purple, memory
+inf, dr, distro
+inf, red, hostname
+inf, yellow, shell
+inf, green, kernel
+inf, cyan, cores
+inf, blue, uptime
+inf, purple, memory
