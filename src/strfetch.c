@@ -56,7 +56,11 @@ void shell() {
 void cores() {
 	printf("[*] Cores:  ");
 	fflush(stdout);
+	#ifdef LINUX
 	system("nproc");
+	#elif defined (MACOS)
+	printf("Working on it...\n");
+	#endif
 }
 void uptime() {
 	long uptime_seconds = 0;
