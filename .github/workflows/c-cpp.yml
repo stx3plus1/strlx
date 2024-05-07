@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: compile
       run: make
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         path: build/strfetch
         name: strfetch-linux
@@ -25,10 +25,10 @@ jobs:
       runs-on: macOS-latest
   
       steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: compile
         run: make
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           path: build/strfetch
           name: strfetch-macos
