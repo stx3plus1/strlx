@@ -85,7 +85,11 @@ void get_memory_info() {
     }
     natural_t mem_used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pagesize;
     int64_t free_memory = physical_memory - mem_used;
-    printf("%.2fGB / %.2fGB\n", (double)mem_used / (1024 * 1024) / 1024, (double)physical_memory / (1024 * 1024) / 1024);
+    if ((double)physical_memory / (1024 * 1024) > 1) {
+        printf("%.2fGiB / %.2fGiB\n", (double)mem_used / 1073741824, (double)physical_memory / 1073741824);
+    } else {
+        printf("%.2fGiB / %.2fGiB\n", (double)mem_used / 1073741824, (double)physical_memory / 1073741824);
+    }
     #elif defined(__linux__) || defined(__GNU__)
     FILE *file = fopen("/proc/meminfo", "r");
     if (!file) {
@@ -103,7 +107,11 @@ void get_memory_info() {
         }
     }
     fclose(file);
-    printf("%.2fGB / %.2fGB\n", (double)(total_memory - free_memory) / 1024 / 1024, (double)total_memory / 1024 / 1024);
+    if ((double)total_memory / 1048576 > 1) {
+        printf("%.2fMiB / %.2fMiB\n", (double)(total_memory - free_memory) / 1024, (double)total_memory / 1024);
+    } else {
+        printf("%.2fGiB / %.2fGiB\n", (double)(total_memory - free_memory) / 1048576, (double)total_memory / 1048576);
+    }
     #else
     printf("Unsupported\n");
     #endif
