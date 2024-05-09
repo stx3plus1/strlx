@@ -56,7 +56,7 @@ void shell() {
 }
 void cores() {
 	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-	printf("[*] Cores:  %d\n", cores);
+	printf("[*] Cores:  %ld\n", cores);
 }
 void uptime() {
 	long uptime_seconds = 0;
@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
 		CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "w");	
-		
+
 		if (!CONFIG) {
 			pstrings(argc, 0, argv);
 			os();
