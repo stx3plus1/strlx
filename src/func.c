@@ -86,7 +86,7 @@ void get_memory_info() {
     natural_t mem_used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pagesize;
     int64_t free_memory = physical_memory - mem_used;
     if ((double)physical_memory / (1024 * 1024) > 1) {
-        printf("%.2fGiB / %.2fGiB\n", (double)mem_used / 1073741824, (double)physical_memory / 1073741824);
+        printf("%.2fGiB / %.2fGiB\n", (double)mem_used / 1048576, (double)physical_memory / 1048576);
     } else {
         printf("%.2fGiB / %.2fGiB\n", (double)mem_used / 1073741824, (double)physical_memory / 1073741824);
     }
@@ -108,9 +108,9 @@ void get_memory_info() {
     }
     fclose(file);
     if ((double)total_memory / 1048576 > 1) {
-        printf("%.2fMiB / %.2fMiB\n", (double)(total_memory - free_memory) / 1024, (double)total_memory / 1024);
-    } else {
         printf("%.2fGiB / %.2fGiB\n", (double)(total_memory - free_memory) / 1048576, (double)total_memory / 1048576);
+    } else {
+        printf("%.2fMiB / %.2fMiB\n", (double)(total_memory - free_memory) / 1024, (double)total_memory / 1024);
     }
     #else
     printf("Unsupported\n");
