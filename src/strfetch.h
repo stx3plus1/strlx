@@ -42,9 +42,8 @@ char osline[256];
 struct utsname kernel;
 
 // strings
-#define istrings 20
-// istrings = number of strings in the array
-char strings[istrings][128] = {
+// a set amount is no longer required
+char strings[][128] = {
 	"i wonder what this button does",
 	"the world will end one day",
 	"time for your psu to blow up",
@@ -66,3 +65,4 @@ char strings[istrings][128] = {
 	"pour water on me, im thirsty",
 	"make: *** No rule to make target `src/func.c', needed by `strfetch'. Stop."
 };
+int istrings = sizeof(strings) / sizeof(strings[0]);

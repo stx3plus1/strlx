@@ -29,9 +29,9 @@ Head over to [Actions](https://github.com/stx3plus1/strfetch/actions/workflows/c
 
 then find the file, and run `chmod +x <drag the file into your terminal>` to mark it as executable.
 
-Then, `./strfetch` should work, and you can install it properly by copying it to /usr/local/bin (`sudo cp strfetch /usr/local/bin` for the few who don't know how)
+Then, `./strfetch` will execute it in place, and you can install it properly by copying it to /usr/local/bin (`sudo cp strfetch /usr/local/bin`)
 
-Copy the configuration file to ~/.config/strfetch/conf, if you want to configure.
+Copy the configuration file to ~/.config/strfetch/conf, if you want to configure. The no config message is gone now, and will autogenerate if possible.
 
 Makefile does this automatically, so compilation is suggested.
 
@@ -54,16 +54,18 @@ The config file is placed locally to each user.
 
 It is located at `~/.config/strfetch/conf`, where ~ is the home directory.
 
-The file works like this:
+### The file works like this:
 
-Comments are defined with `//`. The file will define `true` or `false` on any line to define if color is printed or not.
+Comments are defined with `//`. 
 
-Colors are defined with their English names, before the fetch option. Colors do not have to be repeated for each item.
+The first line contains "color-true" or "color-false" to define color switch. "color-false" will ignore all color calls.
 
-Valid colors are: white, black, red, yellow, green, cyan, blue, purple.
+Colors are defined before the fetch option. Colors have to be repeated for each item.
+
+Valid colors are: white, black, dr (dark red), red, yellow, green, cyan, blue, purple.
 
 The fetch items are defined after color options or on a separate line.
 
-Valid fetch items are: string, hostname, kernel, uptime, memory.
+Valid fetch items are: string, distro, hostname, kernel, cores, uptime, memory.
 
 Read the default config file for more information on syntax. 
