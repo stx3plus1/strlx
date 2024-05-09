@@ -54,13 +54,8 @@ void shell() {
 	printf("[*] Shell:  %s\n", getenv("SHELL"));
 }
 void cores() {
-	printf("[*] Cores:  ");
-	fflush(stdout);
-	#ifdef LINUX
-	system("nproc");
-	#elif defined (MACOS)
-	printf("Working on it...\n");
-	#endif
+	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
+	printf("[*] Cores:  %d\n", cores);
 }
 void uptime() {
 	long uptime_seconds = 0;
