@@ -20,3 +20,16 @@ char ascii_apple[ascii_ln][16] = {
 	" \\#####/ "
 };
 #endif
+#ifdef WINDOWS
+#define ascii_ln 8
+char ascii_windows[ascii_ln][16] = {
+    "  ___  ___  ",
+    " |   ||   | ",
+    " |___||___| ",
+    " |___||___\\ ",
+    " |   ||   \\\\",
+    " |___||___\\\\",
+    " |___||___/",
+    "            "
+};
+#endif
