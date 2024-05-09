@@ -28,6 +28,7 @@ void pstrings(int count, int type, char **value) {
 		}
 	}
 }
+// these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
 	printf("[*] OS:     ");
 	osrelease = fopen("/etc/os-release", "r");
@@ -76,9 +77,7 @@ int main(int argc, char **argv) {
 			return 0;
 		}
 		if (strstr(argv[1], "-u") || strstr(argv[1], "--help") || strstr(argv[1], "--usage")) {
-			printf("usage: strfetch [your string here]\n");
-			printf("strfetch is a simple yet silly C fetch application for getting system stats.\n");
-			printf("Extrememly silly...\n");
+			printf("usage: strfetch [your string here]\nstrfetch is a simple yet silly C fetch application for getting system stats.\nExtremely silly...");
 			pstrings(argc, 1, argv);
 			return 0;
 		}
@@ -86,16 +85,19 @@ int main(int argc, char **argv) {
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
-		printf("Could not find or create a config.\n");
-		pstrings(argc, 0, argv);
-		os();
-		hostname();
-		shell();
-		kernel_ver();
-		cores();
-		uptime();
-		memory();
-		return 0;
+		CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "w");	
+		
+		if (!CONFIG) {
+			pstrings(argc, 0, argv);
+			os();
+			hostname();
+			shell();
+			kernel_ver();
+			cores();
+			uptime();
+			memory();
+			return 0;
+		}
 	} else {
 		int ascline = 0;
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
@@ -126,9 +128,6 @@ int main(int argc, char **argv) {
 			if (color == 1) {
 				if (strstr(word, "white")) {
 					printf("\x1b[37m");
-				}
-				if (strstr(word, "black")) {
-					printf("");
 				}
 				if (strstr(word, "dr")) {
 					printf("\x1b[38;5;9m");
