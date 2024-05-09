@@ -85,19 +85,15 @@ int main(int argc, char **argv) {
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
-		CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "w");	
-
-		if (!CONFIG) {
-			pstrings(argc, 0, argv);
-			os();
-			hostname();
-			shell();
-			kernel_ver();
-			cores();
-			uptime();
-			memory();
-			return 0;
-		}
+		pstrings(argc, 0, argv);
+		os();
+		hostname();
+		shell();
+		kernel_ver();
+		cores();
+		uptime();
+		memory();
+		return 0;
 	} else {
 		int ascline = 0;
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
