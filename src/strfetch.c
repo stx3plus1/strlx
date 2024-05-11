@@ -32,6 +32,11 @@ void os() {
 	printf("OS:     ");
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
+		char* sysname = kernel.sysname;
+		if (sysname = "Darwin") {
+			printf("macOS\n");
+			return; 
+		}
 		printf("%s %s OS\n", kernel.sysname, kernel.release);
 		return; 
 	}
