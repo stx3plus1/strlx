@@ -2,7 +2,7 @@ SRC=src
 BUILD=build
 CC=gcc
 # i love these flags
-CFLAGS=-std=c99 -Ofast -momit-leaf-frame-pointer -fomit-frame-pointer -funroll-loops
+CFLAGS=-std=c99 
 USERDIR=${HOME}
 
 strfetch: $(SRC)/strfetch.c $(SRC)/func.c $(SRC)/random.c
