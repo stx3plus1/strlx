@@ -105,8 +105,10 @@ int main(int argc, char **argv) {
 				ascii_i = apple_i;
 				asctype = 1;
 			} else {
-				ascii_i = tux_i;
-				asctype = 0;
+				if (!asctype) {
+					ascii_i = tux_i;
+					asctype = 0;
+				}
 			}
 			if (strstr(word, "inf")) {
 				ascline++;
