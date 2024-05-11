@@ -60,6 +60,10 @@ Comments are defined with `//`.
 
 The first line contains "color-true" or "color-false" to define color switch. "color-false" will ignore all color calls.
 
+The ASCII logo type is defined by "ascii-tux" or "ascii-apple".
+
+More ASCII logos will be added, but you can also pull request some in yourself if you want!
+
 Colors are defined before the fetch option. Colors have to be repeated for each item.
 
 Valid colors are: white, black, dr (dark red), red, yellow, green, cyan, blue, purple.
