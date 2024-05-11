@@ -5,7 +5,7 @@
 // i worked on this, 100%
 
 // version
-#define VERSION "1.5"
+#define VERSION "1.6"
 
 // built in headers
 #include <stdio.h>
@@ -17,7 +17,7 @@
 #include <sys/utsname.h>
 #include <sys/types.h>
 
-#if defined(__linux__)|| defined(__GNU__)
+#if defined(__linux__) || defined(__GNU__)
     #define LINUX
 #elif defined(__APPLE__)
     #include <sys/sysctl.h>
@@ -42,7 +42,6 @@ char osline[256];
 struct utsname kernel;
 
 // strings
-// a set amount is no longer required
 char strings[][128] = {
 	"i wonder what this button does",
 	"the world will end one day",

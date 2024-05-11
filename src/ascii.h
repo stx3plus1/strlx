@@ -1,16 +1,12 @@
-#ifdef LINUX
-#define ascii_ln 5
-char ascii_tux[ascii_ln][16] = {
+char ascii_tux[][16] = {
 	"        ",
 	"  .-.   ",
 	"  oo|   ",
 	" /`'\\   ",
 	"(\\_;/)  "
 };
-#endif
-#ifdef MACOS
-#define ascii_ln 7
-char ascii_apple[ascii_ln][16] = {
+int tux_i = sizeof(ascii_tux) / sizeof(ascii_tux[0]);
+char ascii_apple[][16] = {
 	"          ",
 	"     .    ",
 	"    /|    ",
@@ -19,4 +15,4 @@ char ascii_apple[ascii_ln][16] = {
 	"\\######\\  ",
 	" \\#####/  "
 };
-#endif
+int apple_i = sizeof(ascii_apple) / sizeof(ascii_apple[0]);

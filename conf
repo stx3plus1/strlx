@@ -2,7 +2,7 @@
 color-true
 
 // ascii type
-// coming next release, im tired
+ascii-tux
 
 // order
 inf, bold, string
