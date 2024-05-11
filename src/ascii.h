@@ -22,3 +22,14 @@ char ascii_apple[][16] = {
 	" \\#####/  "
 };
 int apple_i = sizeof(ascii_apple) / sizeof(ascii_apple[0]);
+char ascii_windows[][16] = {
+    "  ___  ___  ",
+    " |   ||   | ",
+    " |___||___| ",
+    " |___||___\\ ",
+    " |   ||   \\\\",
+    " |___||___\\\\",
+    " |___||___/",
+    "            "
+};
+int windows_i = sizeof(ascii_windows) / sizeof(ascii_windows[0]);
