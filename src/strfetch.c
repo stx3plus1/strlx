@@ -102,10 +102,12 @@ int main(int argc, char **argv) {
 			if (strstr(word, "ascii-tux")) {
 				ascii_i = tux_i;
 				asctype = 0;
-			}
-			if (strstr(word, "ascii-apple")) {
+			} else if (strstr(word, "ascii-apple")) {
 				ascii_i = apple_i;
 				asctype = 1;
+			} else {
+				ascii_i = tux_i;
+				asctype = 0;
 			}
 			if (strstr(word, "inf")) {
 				ascline++;
