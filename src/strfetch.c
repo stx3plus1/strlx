@@ -33,7 +33,7 @@ void os() {
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
 		char* sysname = kernel.sysname;
-		if (sysname = "Darwin") {
+		if (sysname == "Darwin") {
 			printf("macOS\n");
 			return; 
 		}
