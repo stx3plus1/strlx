@@ -30,7 +30,7 @@ void pstrings(int count, int type, char **value) {
 }
 // these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
-	printf("[*] OS:     ");
+	printf("OS:     ");
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
 		printf("%s %s OS\n", kernel.sysname, kernel.release);
@@ -46,27 +46,27 @@ void os() {
 	}
 }
 void hostname() {
-	printf("[*] Host:   %s\n", kernel.nodename);
+	printf("Host:   %s\n", kernel.nodename);
 }
 void kernel_ver() {
-	printf("[*] Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
+	printf("Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
 }
 void shell() {
-	printf("[*] Shell:  %s\n", getenv("SHELL"));
+	printf("Shell:  %s\n", getenv("SHELL"));
 }
 void cores() {
 	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-	printf("[*] Cores:  %ld\n", cores);
+	printf("Cores:  %ld\n", cores);
 }
 void uptime() {
 	long uptime_seconds = 0;
 	if (get_system_uptime(&uptime_seconds)) {
-		printf("[*] Uptime: ");
+		printf("Uptime: ");
    		format_uptime(uptime_seconds); 
  	}
 }
 void memory() {
- 	printf("[*] Memory: ");
+ 	printf("Memory: ");
  	get_memory_info();
 }
 
