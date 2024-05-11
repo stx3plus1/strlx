@@ -62,6 +62,11 @@ char strings[][128] = {
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
-	"make: *** No rule to make target `src/func.c', needed by `strfetch'. Stop."
+	"make: *** No rule to make target `src/func.c', needed by `strfetch'. Stop.",
+	"Windows 10 on top",
+	"Micro$hit want your data",
+	"int main(int argc, char **argv) {}",
+	"MS-DOS Prompt",
+	"your specs kinda suck im not gonna lie"
 };
 int istrings = sizeof(strings) / sizeof(strings[0]);
