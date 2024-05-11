@@ -46,7 +46,7 @@ void os() {
 	}
 }
 void hostname() {
-	printf("[&] Host:   %s\n", kernel.nodename);
+	printf("[*] Host:   %s\n", kernel.nodename);
 }
 void kernel_ver() {
 	printf("[*] Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
