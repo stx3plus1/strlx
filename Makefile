@@ -5,7 +5,7 @@ CC=gcc
 CFLAGS=-std=c99 -Ofast -momit-leaf-frame-pointer -fomit-frame-pointer -funroll-loops
 USERDIR=${HOME}
 
-strfetch: $(SRC)/strfetch.c $(SRC)/func.c
+strfetch: $(SRC)/strfetch.c $(SRC)/func.c $(SRC)/random.c
 	@echo Compiling...
 	@mkdir -p $(BUILD)
 	$(CC) -o $(BUILD)/$@ $^ $(CFLAGS)

@@ -1,8 +1,8 @@
 
 #include <stdlib.h>
-#define MAX 200
+// this will be implemented later 
 
-char randomstring[MAX][300] = {
+char randomstring[][300] = {
   "Did you know? Command: ls - List directory contents",
   "Why don't some people trust Linux? Because they can't 'window' shop!",
   "Did you know? Command: cd - Change the shell working directory.",

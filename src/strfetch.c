@@ -8,15 +8,14 @@
 #include "strfetch.h"
 
 void pstrings(int count, int type, char **value) {
+	int rand = returnrandomnumber(1, istrings);
 	if (type == 1) {
-		time_t randomiser;
-		srand((unsigned) time(&randomiser));
-		printf("...%s\n", strings[rand() % istrings]);
+		printf("...%s\n", strings[rand]);
 	} else {
 		if (count < 2) {
 			time_t randomiser;
 			srand((unsigned) time(&randomiser));
-			printf("%s\n", strings[rand() % istrings]);
+			printf("%s\n", strings[rand]);
 		} else {
 			//printf("[!] ");
 			i = 0;

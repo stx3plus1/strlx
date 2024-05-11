@@ -28,6 +28,9 @@
 #include "func.h"
 #include "ascii.h"
 
+// random
+int returnrandomnumber(int lower, int upper);
+
 // configuration file
 int i;
 FILE* CONFIG;
