@@ -1,28 +1,28 @@
-#ifdef LINUX
-#define ascii_ln 5
-char ascii_tux[ascii_ln][16] = {
-	"       ",
-	"  .-.  ",
-	"  oo|  ",
-	" /`'\\  ",
-	"(\\_;/) "
+// strfetch 
+// by cirkulx also known as stx3plus1 or stx4
+
+// you may distribute and modify this code provided you give credit
+// i worked on this, 100%
+
+char ascii_tux[][16] = {
+	"        ",
+	"  .-.   ",
+	"  oo|   ",
+	" /`'\\   ",
+	"(\\_;/)  "
 };
-#endif
-#ifdef MACOS
-#define ascii_ln 7
-char ascii_apple[ascii_ln][16] = {
-	"         ",
-	"     .   ",
-	"    /|   ",
-	"/######/ ",
-	"######<  ",
-	"\\######\\ ",
-	" \\#####/ "
+int tux_i = sizeof(ascii_tux) / sizeof(ascii_tux[0]);
+char ascii_apple[][16] = {
+	"          ",
+	"     .    ",
+	"    /|    ",
+	"/######/  ",
+	"######<   ",
+	"\\######\\  ",
+	" \\#####/  "
 };
-#endif
-#ifdef WINDOWS
-#define ascii_ln 8
-char ascii_windows[ascii_ln][16] = {
+int apple_i = sizeof(ascii_apple) / sizeof(ascii_apple[0]);
+char ascii_windows[][16] = {
     "  ___  ___  ",
     " |   ||   | ",
     " |___||___| ",
@@ -32,4 +32,4 @@ char ascii_windows[ascii_ln][16] = {
     " |___||___/",
     "            "
 };
-#endif
+int windows_i = sizeof(ascii_windows) / sizeof(ascii_windows[0]);

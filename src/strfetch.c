@@ -16,9 +16,9 @@ void pstrings(int count, int type, char **value) {
 		if (count < 2) {
 			time_t randomiser;
 			srand((unsigned) time(&randomiser));
-			printf("[!] %s\n", strings[rand() % istrings]);
+			printf("%s\n", strings[rand() % istrings]);
 		} else {
-			printf("[!] ");
+			//printf("[!] ");
 			i = 0;
 			while (i < (count - 1)) {
 				i++;
@@ -30,7 +30,7 @@ void pstrings(int count, int type, char **value) {
 }
 // these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
-	printf("[*] OS:     ");
+	printf("OS:     ");
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
 		printf("%s %s OS\n", kernel.sysname, kernel.release);
@@ -46,27 +46,27 @@ void os() {
 	}
 }
 void hostname() {
-	printf("[&] Host:   %s\n", kernel.nodename);
+	printf("Host:   %s\n", kernel.nodename);
 }
 void kernel_ver() {
-	printf("[*] Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
+	printf("Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
 }
 void shell() {
-	printf("[*] Shell:  %s\n", getenv("SHELL"));
+	printf("Shell:  %s\n", getenv("SHELL"));
 }
 void cores() {
 	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-	printf("[*] Cores:  %ld\n", cores);
+	printf("Cores:  %ld\n", cores);
 }
 void uptime() {
 	long uptime_seconds = 0;
 	if (get_system_uptime(&uptime_seconds)) {
-		printf("[*] Uptime: ");
+		printf("Uptime: ");
    		format_uptime(uptime_seconds); 
  	}
 }
 void memory() {
- 	printf("[*] Memory: ");
+ 	printf("Memory: ");
  	get_memory_info();
 }
 
@@ -96,30 +96,44 @@ int main(int argc, char **argv) {
 		return 0;
 	} else {
 		int ascline = 0;
+		int asctype = 0;
+		int ascii_i;
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
+			if (strstr(word, "ascii-tux")) {
+				ascii_i = tux_i;
+				asctype = 0;
+			} else if (strstr(word, "ascii-apple")) {
+				ascii_i = apple_i;
+				asctype = 1;
+			} else {
+				ascii_i = tux_i;
+				asctype = 0;
+			}
 			if (strstr(word, "inf")) {
 				ascline++;
-				if (ascline >= ascii_ln) {
-						#ifdef LINUX
-						printf("%s", ascii_tux[0]);	
-						#elif defined (MACOS)
-						printf("%s", ascii_apple[0]);	
-						#endif
+				if (ascline >= ascii_i) {
+						if (asctype == 0) {
+							printf("%s", ascii_tux[0]);	
+						} else if (asctype == 1) {
+							printf("%s", ascii_apple[0]);	
+						} else {
+							printf("%s", ascii_tux[0]);	
+						}
 				} else {
-					#ifdef LINUX
-					printf("\x1b[0m%s", ascii_tux[ascline]);
-					#elif defined (MACOS)
-					printf("\x1b[0m%s", ascii_apple[ascline]);
-					#endif
+					if (asctype == 0) {
+						printf("\x1b[0m%s", ascii_tux[ascline]);
+					} else if (asctype == 1) {
+						printf("\x1b[0m%s", ascii_apple[ascline]);
+					} else {
+						printf("\x1b[0m%s", ascii_tux[ascline]);
+					}
 				}
 			}
-			if (strstr(word, "color-")) {
-				if (strstr(word, "true")) {
-					color = 1;
-				}
-				if (strstr(word, "false")) {
-					color = 0;
-				}
+			if (strstr(word, "color-true")) {
+				color = 1;
+			}
+			if (strstr(word, "color-false")) {
+				color = 0;
 			}
 			if (color == 1) {
 				if (strstr(word, "white")) {
