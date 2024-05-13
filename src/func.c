@@ -80,7 +80,7 @@ void get_memory_info() {
     host_page_size(host_port, &pagesize);
     vm_statistics_data_t vm_stat;
     if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS) {
-		printf("Memory calculation error");
+		printf("Memory calculation error\n");
         return;
     }
     natural_t mem_used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pagesize;
@@ -93,7 +93,7 @@ void get_memory_info() {
     #elif defined(__linux__) || defined(__GNU__)
     FILE *file = fopen("/proc/meminfo", "r");
     if (!file) {
-		printf("Memory calculation error");
+		printf("Memory calculation error\n");
         return;
     }
     char line[256];
@@ -104,7 +104,7 @@ void get_memory_info() {
             sscanf(line + 9, "%d", &total_memory);
         } else if (strncmp(line, "MemAvailable:", 8) == 0) {
             sscanf(line + 13, "%d", &free_memory);
-        }
+        } 
     }
     fclose(file);
     if ((double)total_memory / 1048576 > 1) {
