@@ -1,9 +1,10 @@
 SRC=src
 BUILD=build
 CC=gcc
-# i love these flags
 CFLAGS=-std=c99 
 USERDIR=${HOME}
+
+.PHONY: clean strfetch
 
 strfetch: $(SRC)/strfetch.c $(SRC)/func.c $(SRC)/random.c
 	@echo Compiling...

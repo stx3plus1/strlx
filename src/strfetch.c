@@ -29,11 +29,11 @@ void pstrings(int count, int type, char **value) {
 }
 // these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
-	printf("OS:     ");
+	printf("OS: ");
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
 		char* sysname = kernel.sysname;
-		if ((sysname = "Darwin")) {
+		if (strstr(sysname, "Darwin")) {
 			printf("macOS\n");
 			return; 
 		}
@@ -50,17 +50,17 @@ void os() {
 	}
 }
 void hostname() {
-	printf("Host:   %s\n", kernel.nodename);
+	printf("Host: %s\n", kernel.nodename);
 }
 void kernel_ver() {
 	printf("Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
 }
 void shell() {
-	printf("Shell:  %s\n", getenv("SHELL"));
-}
+	printf("Shell: %s\n", getenv("SHELL"));
+}     
 void cores() {
 	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-	printf("Cores:  %ld\n", cores);
+	printf("Cores: %ld\n", cores);
 }
 void uptime() {
 	long uptime_seconds = 0;
@@ -99,9 +99,6 @@ int main(int argc, char **argv) {
 		memory();
 		return 0;
 	} else {
-		int ascline = 0;
-		int asctype = 0;
-		int ascii_i;
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
 			if (strstr(word, "ascii-tux")) {
 				ascii_i = tux_i;
@@ -198,7 +195,20 @@ int main(int argc, char **argv) {
 				printf("\x1b[0m");
 			}
 		} 
- 	} 
+ 	}
+	if (ascline < ascii_i) {
+		while (ascline < ascii_i - 1) {
+			ascline++;
+			if (asctype == 0) {
+				printf("\x1b[0m%s", ascii_tux[ascline]);
+			} else if (asctype == 1) {
+				printf("\x1b[0m%s", ascii_apple[ascline]);
+			} else {
+				printf("\x1b[0m%s", ascii_tux[ascline]);
+			}
+			printf("\n");
+		}
+	}
 	printf("\x1b[0m"); 
 	if (CONFIG) {
 		fclose(CONFIG);

@@ -28,6 +28,11 @@
 #include "func.h"
 #include "ascii.h"
 
+// ascii
+int ascline = 0;
+int asctype = 0;
+int ascii_i;
+
 // random
 int returnrandomnumber(int lower, int upper);
 

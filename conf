@@ -5,12 +5,12 @@ color-true
 ascii-tux
 
 // order
-inf, bold, string
+inf bold string
 reset
-inf, dr, distro
-inf, red, hostname
-inf, yellow, shell
-inf, green, kernel
-inf, cyan, cores
-inf, blue, uptime
-inf, purple, memory
+inf  dr      distro
+inf  red     hostname
+inf  yellow  shell
+inf  green   kernel
+inf  cyan    cores
+inf  blue    uptime
+inf  purple  memory
