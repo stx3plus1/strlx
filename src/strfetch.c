@@ -7,6 +7,12 @@
 // contains definitions and includes for other headers, required
 #include "strfetch.h"
 
+void basics() {
+	char* user = getenv("USER");
+	printf("%s@%s\n", user, kernel.nodename);
+
+}
+
 void pstrings(int count, int type, char **value) {
 	int rand = returnrandomnumber(1, istrings);
 	if (type == 1) {
@@ -89,6 +95,7 @@ int main(int argc, char **argv) {
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
 	if (!CONFIG) {
+		basics();
 		pstrings(argc, 0, argv);
 		os();
 		hostname();
@@ -166,6 +173,9 @@ int main(int argc, char **argv) {
 			}
 			if(strstr(word, "bold")) {
 				printf("\x1b[1m");
+			}
+			if(strstr(word, "basics")) {
+				basics();
 			}
 			if(strstr(word, "string")) { 
 				pstrings(argc, 0, argv);
