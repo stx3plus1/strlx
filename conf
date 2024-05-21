@@ -5,8 +5,9 @@ color-true
 ascii-tux
 
 // order
-inf bold string
+inf  bold    basics
 reset
+inf          string
 inf  dr      distro
 inf  red     hostname
 inf  yellow  shell
