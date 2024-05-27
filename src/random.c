@@ -7,6 +7,7 @@
 #include "randomstring.h"
 
 int returnrandomnumber(int lower,int upper){
+  srand(time((0)));
   int number = (rand() % (upper - lower + 1)) + lower ;
   return number;
 }
