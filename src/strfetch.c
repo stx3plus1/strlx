@@ -70,10 +70,12 @@ void cores() {
 }
 void uptime() {
 	long uptime_seconds = 0;
+	printf("Uptime: ");
 	if (get_system_uptime(&uptime_seconds)) {
-		printf("Uptime: ");
    		format_uptime(uptime_seconds); 
- 	}
+ 	} else {
+		printf("\n");
+	}
 }
 void memory() {
  	printf("Memory: ");
