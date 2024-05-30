@@ -23,7 +23,6 @@ void pstrings(int count, int type, char **value) {
 			srand((unsigned) time(&randomiser));
 			printf("%s\n", strings[rand]);
 		} else {
-			//printf("[!] ");
 			i = 0;
 			while (i < (count - 1)) {
 				i++;
