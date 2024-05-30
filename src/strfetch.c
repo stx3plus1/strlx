@@ -36,6 +36,14 @@ void pstrings(int count, int type, char **value) {
 // these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
 	printf("OS: ");
+	// correct bedrock linux release info
+	FILE* bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
+	if (bedrockrelease) {
+		char distro[64];
+		fgets(distro, 63, bedrockrelease);
+		printf("%s", distro);
+		return;
+	}
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
 		char* sysname = kernel.sysname;
