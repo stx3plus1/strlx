@@ -19,8 +19,6 @@ void pstrings(int count, int type, char **value) {
 		printf("...%s\n", strings[rand]);
 	} else {
 		if (count < 2) {
-			time_t randomiser;
-			srand((unsigned) time(&randomiser));
 			printf("%s\n", strings[rand]);
 		} else {
 			i = 0;
