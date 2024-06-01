@@ -69,8 +69,9 @@ void shell() {
 	printf("Shell: \x1b[0m%s\n", getenv("SHELL"));
 }     
 void cpu() {
-	int set = 0;
 	cores = sysconf(_SC_NPROCESSORS_ONLN);
+	#ifdef LINUX
+	int set = 0;
 	cpuinfo = fopen("/proc/cpuinfo", "r");
 	if (!cpuinfo) {
 		printf("Cores: \x1b[0m%ld\n", cores);
@@ -91,6 +92,12 @@ void cpu() {
 		return;
 	}
 	printf("CPU: \x1b[0m%s (%ld)\n", cpuinf, cores);
+	#elif defined(MACOS)
+	char cpuin[256];
+	size_t cpuini = 256;
+    sysctlbyname("machdep.cpu.brand_string", &cpuin, &cpuini, NULL, 0);
+	printf("CPU: \x1b[0m%s (%ld)\n", cpuin, cores);
+	#endif
 }
 void uptime() {
 	long uptime_seconds = 0;
