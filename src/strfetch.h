@@ -25,7 +25,7 @@
 #endif
 
 // strfetch info functions
-#include "func.h"
+#include "memup.h"
 #include "ascii.h"
 
 // ascii
@@ -42,9 +42,21 @@ FILE* CONFIG;
 int color = 0;
 char word[32];
 
+// basics
+char* user;
+
 // os
 FILE* osrelease;
 char osline[256];
+char* distro;
+char* sysname;
+FILE* bedrockrelease;
+
+// cpu
+char cpuline[256];
+char* cpuinf;
+long int cores;
+FILE* cpuinfo;
 
 // uname
 struct utsname kernel;
@@ -66,7 +78,7 @@ char strings[][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-        "dd if=/dev/zero of=/dev/sda",
+    "dd if=/dev/zero of=/dev/sda",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",

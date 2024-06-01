@@ -8,9 +8,8 @@
 #include "strfetch.h"
 
 void basics() {
-	char* user = getenv("USER");
+	user = getenv("USER");
 	printf("%s@%s\n", user, kernel.nodename);
-
 }
 
 void pstrings(int count, int type, char **value) {
@@ -34,7 +33,7 @@ void pstrings(int count, int type, char **value) {
 void os() {
 	printf("OS: \x1b[0m");
 	// correct bedrock linux release info
-	FILE* bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
+	bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
 	if (bedrockrelease) {
 		char distro[64];
 		fgets(distro, 63, bedrockrelease);
@@ -43,7 +42,7 @@ void os() {
 	}
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
-		char* sysname = kernel.sysname;
+		sysname = kernel.sysname;
 		if (strstr(sysname, "Darwin")) {
 			printf("macOS\n");
 			return; 
@@ -53,7 +52,7 @@ void os() {
 	}
 	while (fgets(osline, 128, osrelease)) {
 		if (strstr(osline, "PRETTY_NAME")) {
-			char* distro = strtok(osline, "\"");
+			distro = strtok(osline, "\"");
 			distro = strtok(NULL, "\"");
 			printf("%s\n", distro);
 			return; 
@@ -70,24 +69,25 @@ void shell() {
 	printf("Shell: \x1b[0m%s\n", getenv("SHELL"));
 }     
 void cpu() {
-	char cpuline[256];
-	char* cpu;
-	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-	FILE* cpuinfo = fopen("/proc/cpuinfo", "r");
+	cores = sysconf(_SC_NPROCESSORS_ONLN);
+	cpuinfo = fopen("/proc/cpuinfo", "r");
 	if (!cpuinfo) {
 		printf("Cores: \x1b[0m%ld\n", cores);
 		return;
 	}
 	while(fgets(cpuline, 255, cpuinfo)) {
 		if (strstr(cpuline, "model name")) {
-			cpu = strtok(cpuline, ":");
-			cpu = strtok(NULL, ":");
-			cpu++;
-			cpu[strlen(cpu)-1] = '\0';
+			cpuinf = strtok(cpuline, ":");
+			cpuinf = strtok(NULL, ":");
+			cpuinf++;
+			cpuinf[strlen(cpuinf)-1] = '\0';
 			break;
+		} else {
+			printf("Cores: \x1b[0m%ld\n", cores);
+			return;
 		}
 	}
-	printf("CPU: \x1b[0m%s (%ld)\n", cpu, cores);
+	printf("CPU: \x1b[0m%s (%ld)\n", cpuinf, cores);
 }
 void uptime() {
 	long uptime_seconds = 0;

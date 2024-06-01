@@ -6,7 +6,7 @@ USERDIR=${HOME}
 
 .PHONY: clean strfetch
 
-strfetch: $(SRC)/strfetch.c $(SRC)/func.c $(SRC)/random.c
+strfetch: $(SRC)/strfetch.c $(SRC)/memup.c $(SRC)/random.c
 	@echo Compiling...
 	@mkdir -p $(BUILD)
 	$(CC) -o $(BUILD)/$@ $^ $(CFLAGS)
