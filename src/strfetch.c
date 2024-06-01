@@ -14,7 +14,7 @@ void basics() {
 }
 
 void pstrings(int count, int type, char **value) {
-	int rand = returnrandomnumber(1, istrings);
+	int rand = returnrandomnumber(0, istrings);
 	if (type == 1) {
 		printf("...%s\n", strings[rand]);
 	} else {
@@ -32,7 +32,7 @@ void pstrings(int count, int type, char **value) {
 }
 // these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
-	printf("OS: ");
+	printf("OS: \x1b[0m");
 	// correct bedrock linux release info
 	FILE* bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
 	if (bedrockrelease) {
@@ -61,21 +61,36 @@ void os() {
 	}
 }
 void hostname() {
-	printf("Host: %s\n", kernel.nodename);
+	printf("Host: \x1b[0m%s\n", kernel.nodename);
 }
 void kernel_ver() {
-	printf("Kernel: %s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
+	printf("Kernel: \x1b[0m%s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
 }
 void shell() {
-	printf("Shell: %s\n", getenv("SHELL"));
+	printf("Shell: \x1b[0m%s\n", getenv("SHELL"));
 }     
-void cores() {
+void cpu() {
+	char cpuline[256];
+	char* cpu;
 	long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-	printf("Cores: %ld\n", cores);
+	FILE* cpuinfo = fopen("/proc/cpuinfo", "r");
+	if (!cpuinfo) {
+		printf("Cores: \x1b[0m%ld\n", cores);
+	}
+	while(fgets(cpuline, 255, cpuinfo)) {
+		if (strstr(cpuline, "model name")) {
+			cpu = strtok(cpuline, ":");
+			cpu = strtok(NULL, ":");
+			cpu++;
+			cpu[strlen(cpu)-1] = '\0';
+			break;
+		}
+	}
+	printf("CPU: \x1b[0m%s (%ld)\n", cpu, cores);
 }
 void uptime() {
 	long uptime_seconds = 0;
-	printf("Uptime: ");
+	printf("Uptime: \x1b[0m");
 	if (get_system_uptime(&uptime_seconds)) {
    		format_uptime(uptime_seconds); 
  	} else {
@@ -83,7 +98,7 @@ void uptime() {
 	}
 }
 void memory() {
- 	printf("Memory: ");
+ 	printf("Memory: \x1b[0m");
  	get_memory_info();
 }
 
@@ -108,7 +123,7 @@ int main(int argc, char **argv) {
 		hostname();
 		shell();
 		kernel_ver();
-		cores();
+		cpu();
 		uptime();
 		memory();
 		return 0;
@@ -199,8 +214,8 @@ int main(int argc, char **argv) {
 			if(strstr(word, "shell")) { 
 				shell(); 
 			}
-			if(strstr(word, "cores")) {
-				cores();
+			if(strstr(word, "cpu")) {
+				cpu();
 			}
 			if(strstr(word, "uptime")) { 
 				uptime();

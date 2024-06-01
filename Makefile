@@ -10,7 +10,7 @@ strfetch: $(SRC)/strfetch.c $(SRC)/func.c $(SRC)/random.c
 	@echo Compiling...
 	@mkdir -p $(BUILD)
 	$(CC) -o $(BUILD)/$@ $^ $(CFLAGS)
-	@strip $(BUILD)/$@
+	strip $(BUILD)/$@
 	@echo Done!
 
 install: $(BUILD)/strfetch

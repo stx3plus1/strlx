@@ -5,7 +5,7 @@
 // i worked on this, 100%
 
 // version
-#define VERSION "1.6"
+#define VERSION "1.7"
 
 // built in headers
 #include <stdio.h>
@@ -66,7 +66,7 @@ char strings[][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-    "dd if=/dev/zero of=/dev/sda",
+        "dd if=/dev/zero of=/dev/sda",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
@@ -77,4 +77,4 @@ char strings[][128] = {
 	"MS-DOS Prompt",
 	"your specs kinda suck im not gonna lie"
 };
-int istrings = sizeof(strings) / sizeof(strings[0]);
+int istrings = (sizeof(strings) / sizeof(strings[0]))-1;

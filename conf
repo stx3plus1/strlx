@@ -12,6 +12,6 @@ inf  dr      distro
 inf  red     hostname
 inf  yellow  shell
 inf  green   kernel
-inf  cyan    cores
+inf  cyan    cpu
 inf  blue    uptime
 inf  purple  memory

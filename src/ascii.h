@@ -5,7 +5,7 @@
 // i worked on this, 100%
 
 char ascii_tux[][16] = {
-	"        ",
+	"\x1b[0m        ",
 	"  .-.   ",
 	"  oo|   ",
 	" /`'\\   ",
@@ -13,7 +13,7 @@ char ascii_tux[][16] = {
 };
 int tux_i = sizeof(ascii_tux) / sizeof(ascii_tux[0]);
 char ascii_apple[][16] = {
-	"          ",
+	"\x1b[0m          ",
 	"     .    ",
 	"    /|    ",
 	"/######/  ",
@@ -23,7 +23,7 @@ char ascii_apple[][16] = {
 };
 int apple_i = sizeof(ascii_apple) / sizeof(ascii_apple[0]);
 char ascii_windows[][16] = {
-    "  ___  ___  ",
+    "\x1b[0m  ___  ___  ",
     " |   ||   | ",
     " |___||___| ",
     " |___||___\\ ",
