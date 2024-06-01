@@ -69,6 +69,7 @@ void shell() {
 	printf("Shell: \x1b[0m%s\n", getenv("SHELL"));
 }     
 void cpu() {
+	int set = 0;
 	cores = sysconf(_SC_NPROCESSORS_ONLN);
 	cpuinfo = fopen("/proc/cpuinfo", "r");
 	if (!cpuinfo) {
@@ -77,15 +78,17 @@ void cpu() {
 	}
 	while(fgets(cpuline, 255, cpuinfo)) {
 		if (strstr(cpuline, "model name")) {
+			set = 1;
 			cpuinf = strtok(cpuline, ":");
 			cpuinf = strtok(NULL, ":");
 			cpuinf++;
 			cpuinf[strlen(cpuinf)-1] = '\0';
 			break;
-		} else {
-			printf("Cores: \x1b[0m%ld\n", cores);
-			return;
 		}
+	}
+	if (set == 0) {
+		printf("Cores: \x1b[0m%ld\n", cores);
+		return;
 	}
 	printf("CPU: \x1b[0m%s (%ld)\n", cpuinf, cores);
 }
