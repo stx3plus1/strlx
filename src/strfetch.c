@@ -70,7 +70,7 @@ void shell() {
 }     
 void cpu() {
 	cores = sysconf(_SC_NPROCESSORS_ONLN);
-	#ifdef LINUX
+	#ifdef LINUX || defined(__GNU__)
 	int set = 0;
 	cpuinfo = fopen("/proc/cpuinfo", "r");
 	if (!cpuinfo) {
