@@ -76,6 +76,7 @@ void cpu() {
 	FILE* cpuinfo = fopen("/proc/cpuinfo", "r");
 	if (!cpuinfo) {
 		printf("Cores: \x1b[0m%ld\n", cores);
+		return;
 	}
 	while(fgets(cpuline, 255, cpuinfo)) {
 		if (strstr(cpuline, "model name")) {
