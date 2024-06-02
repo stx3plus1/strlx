@@ -70,6 +70,6 @@ Valid colors are: white, black, dr (dark red), red, yellow, green, cyan, blue, p
 
 The fetch items are defined after color options or on a separate line.
 
-Valid fetch items are: string, distro, hostname, kernel, cores, uptime, memory.
+Valid fetch items are: string, distro, hostname, kernel, cpu, uptime, memory.
 
 Read the default config file for more information on syntax. 
