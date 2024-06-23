@@ -40,11 +40,7 @@ void os() {
 	osrelease = fopen("/etc/os-release", "r");
 	if (!osrelease) {
 		sysname = kernel.sysname;
-		if (strstr(sysname, "Darwin")) {
-			printf("macOS\n");
-			return; 
-		}
-		printf("%s %s OS\n", kernel.sysname, kernel.release);
+		printf("%s\n", sysname);
 		return; 
 	}
 	while (fgets(osline, 128, osrelease)) {
