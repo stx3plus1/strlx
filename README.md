@@ -54,6 +54,8 @@ The ASCII logo is set with "ascii-tux" or "ascii-apple".
 
 Correctly programmed pull requests or simply just logos will be accepted, provided someone adds the code part before merging.
 
+The "reset" keyword only prints an ANSI reset (which clears any formatting) and is simply "\x1b[0m" in a printf. You can use this on the shell if your shell breaks.
+
 Colors are defined before the fetch option. Colors HAVE TO BE REPEATED for each item.
 
 Valid colors are: white, black, dr (dark red), red, yellow, green, cyan, blue, purple.
