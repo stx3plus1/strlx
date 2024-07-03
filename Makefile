@@ -1,6 +1,6 @@
 SRC=src
 BUILD=build
-CC=gcc
+CC=cc
 CFLAGS=-std=c99 
 USERDIR=${HOME}
 
