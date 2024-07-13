@@ -4,7 +4,8 @@
 #include <string.h>
 #include <time.h>
 #include <stdlib.h>
-#include "randomstring.h"
+// #include "randomstring.h"
+// 1.8 will have a toggle, im probably gonna add it tonight
 
 int returnrandomnumber(int lower,int upper){
   srand(time((0)));
