@@ -11,6 +11,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <pwd.h>
 #include <sys/utsname.h>
 #include <sys/types.h>
 

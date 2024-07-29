@@ -5,8 +5,8 @@
 #include "strfetch.h"
 
 void basics() {
-	user = getenv("USER");
-	printf("%s@%s\n", user, kernel.nodename);
+	struct passwd *p = getpwuid(getuid());
+	printf("%s@%s\n", p->pw_name, kernel.nodename);
 }
 
 void pstrings(int count, int type, char **value) {
