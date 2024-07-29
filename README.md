@@ -19,13 +19,9 @@ Strings do not require quotes but using them if implementing strfetch into your 
 
 ## Installation
 
-There are 2 methods for installation - compiling manually, or grabbing the latest build from Actions.
+There are 2 methods for installation - compiling manually, or grabbing the latest release from [Releases](https://github.com/stx3plus1/strfetch/releases/).
 
-It is recommended to grab from Actions if you don't feel like compiling, but compiling is the better option.
-
-Head over to [Actions](https://github.com/stx3plus1/strfetch/actions/workflows/c-cpp.yml) and grab the lastest artifact.
-
-Run `chmod +x <the executable>` to mark it as executable.
+Run `chmod +x <the executable>` to mark it as executable, if you cannot run it.
 
 You can install it properly by copying it to /usr/local/bin (`sudo cp strfetch /usr/local/bin`)
 
