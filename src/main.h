@@ -1,4 +1,4 @@
-// strfetch 
+// strlx 
 // by cirkulx also known as stx3plus1 or stx4
 
 // version
