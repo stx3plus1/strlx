@@ -1,19 +1,19 @@
-# strfetch
+# strlx
 A minimal, fun and **fast** fetch programmed in raw C.
 
 ## Basics
 ![image](.github/IMG_3123.jpeg)
 
-strfetch prints a really silly message along with your fetch, which can be default or custom.
+strlx prints a really silly message along with your fetch, which can be default or custom.
 
-"str" in strfetch stands for "string" - so of course we need a string...
+"str" in strlx stands for "string" - so of course we need a string...
 
 No. Windows is not supported.
 
 ## Usage
-`strfetch <string>`
+`strlx <string>`
 
-strfetch will display your string as an alert in the fetch on the first line. If there is none parsed, a random default based on your computer's time as a seed will be shown.
+strlx will display your string as an alert in the fetch on the first line. If there is none parsed, a random default based on your computer's time as a seed will be shown.
 
 Strings do not require quotes but using them if implementing strfetch into your shell, for example, is good practice. 
 
@@ -27,9 +27,9 @@ Head over to [Actions](https://github.com/stx3plus1/strfetch/actions/workflows/c
 
 Run `chmod +x <the executable>` to mark it as executable.
 
-You can install it properly by copying it to /usr/local/bin (`sudo cp strfetch /usr/local/bin`)
+You can install it properly by copying it to /usr/local/bin (`sudo cp strlx /usr/local/bin`)
 
-Copy the configuration file to ~/.config/strfetch/conf, if you want to configure.
+Copy the configuration file to ~/.config/strlx/conf, if you want to configure.
 
 Makefile does this automatically, so compilation is suggested.
  
@@ -40,11 +40,11 @@ Compilation for Linux, OS X and GNU (Hurd).
 
 `make && sudo make install && make install-config`
 
-to compile then add strfetch to /usr/local/bin. Add /usr/local/bin to PATH to ensure strfetch functions after.
+to compile then add to /usr/local/bin. Add /usr/local/bin to PATH to ensure strlx functions after.
 
 ## Configuration
 
-strfetch looks in `~/.config/strfetch/conf`, where ~ is the home directory.
+strlx looks in `~/.config/strfetch/conf`, where ~ is the home directory.
 
 ### The file works like this:
 
