@@ -119,7 +119,7 @@ int main(int argc, char **argv) {
 		}
 	}
 	uname(&kernel);
-	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strfetch/conf"), "r");	
+	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strlx/conf"), "r");	
 	if (!CONFIG) {
 		basics();
 		pstrings(argc, 0, argv);
