@@ -67,7 +67,7 @@ void cpu() {
 	int set = 0;
 	cpuinfo = fopen("/proc/cpuinfo", "r");
 	if (!cpuinfo) {
-		printf("CPU: \x1b[0m%(ld)\n", cores);
+		printf("CPU: \x1b[0m(%ld)\n", cores);
 		return;
 	}
 	while(fgets(cpuline, 255, cpuinfo)) {
