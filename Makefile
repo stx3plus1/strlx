@@ -4,16 +4,16 @@ CC=cc
 CFLAGS=-std=c99 
 USERDIR=${HOME}
 
-.PHONY: clean strfetch
+.PHONY: clean strlx
 
-strfetch: $(SRC)/strfetch.c $(SRC)/memup.c $(SRC)/random.c
+strlx: $(SRC)/main.c $(SRC)/memup.c $(SRC)/random.c
 	@echo Compiling...
 	@mkdir -p $(BUILD)
 	$(CC) -o $(BUILD)/$@ $^ $(CFLAGS)
 	strip $(BUILD)/$@
 	@echo Done!
 
-install: $(BUILD)/strfetch
+install: $(BUILD)/strlx
 	@echo Installing...
 	@mkdir -p /usr/local/bin
 	@cp $< /usr/local/bin/
@@ -21,8 +21,8 @@ install: $(BUILD)/strfetch
 
 install-config: conf
 	@echo Installing configuration file...
-	@mkdir -p $(USERDIR)/.config/strfetch
-	@cp conf $(USERDIR)/.config/strfetch/
+	@mkdir -p $(USERDIR)/.config/strlx
+	@cp conf $(USERDIR)/.config/strlx/
 	@echo Done!
 
 clean: 
