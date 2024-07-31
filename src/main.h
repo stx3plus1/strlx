@@ -22,7 +22,7 @@
     #define MACOS
 #endif
 
-// strfetch info functions
+// info functions
 #include "memup.h"
 #include "ascii.h"
 
@@ -80,6 +80,7 @@ char strings[][128] = {
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
+// this ones a real error, do not replace with strlx
 	"make: *** No rule to make target `src/func.c', needed by `strfetch'. Stop.",
 	"Windows 10 on top",
 	"Micro$hit want your data",
