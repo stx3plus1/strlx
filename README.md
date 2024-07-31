@@ -1,5 +1,5 @@
 # strlx
-A minimal, fun and **fast** fetch programmed in raw C.
+A minimal and FAST system resource viewer in C.
 
 ## Basics
 ![image](.github/IMG_3123.jpeg)
