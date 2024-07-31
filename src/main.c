@@ -1,8 +1,8 @@
-// strfetch
+// strlx
 // by cirkulx also known as stx3plus1 or stx4
 
 // contains definitions and includes for other headers, required
-#include "strfetch.h"
+#include "main.h"
 
 void basics() {
 	struct passwd *p = getpwuid(getuid());
@@ -109,11 +109,11 @@ void memory() {
 int main(int argc, char **argv) {
 	if (argc > 1) {
 		if (strcmp(argv[1], "--version") == 0) {
-			printf("strfetch %s\nBy cirkulx.\n", VERSION);
+			printf("strlx %s\nBy cirkulx.\n", VERSION);
 			return 0;
 		}
 		if (strstr(argv[1], "-u") || strstr(argv[1], "--help") || strstr(argv[1], "--usage")) {
-			printf("usage: strfetch [your string here]\nstrfetch is a simple yet silly C fetch application for getting system stats.\nExtremely silly...");
+			printf("usage: %s [your string here]\nstrlx is a simple yet silly C fetch application for getting system stats.\nExtremely silly...", argv[0]);
 			pstrings(argc, 1, argv);
 			return 0;
 		}
