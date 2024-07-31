@@ -4,9 +4,9 @@ CC=cc
 CFLAGS=-std=c99 
 USERDIR=${HOME}
 
-.PHONY: clean prog
+.PHONY: clean strlx
 
-prog: $(SRC)/main.c $(SRC)/memup.c $(SRC)/random.c
+strlx: $(SRC)/main.c $(SRC)/memup.c $(SRC)/random.c
 	@echo Compiling...
 	@mkdir -p $(BUILD)
 	$(CC) -o $(BUILD)/$@ $^ $(CFLAGS)
