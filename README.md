@@ -1,8 +1,8 @@
 # strlx
-A minimal and FAST system resource viewer in C.
+Getting started guide (kinda)
 
 ## Basics
-![image](.github/IMG_3123.jpeg)
+<sub>some setup examples will go here when i have successfully riced my surface pro</sub> 
 
 strlx prints a really silly message along with your fetch, which can be default or custom.
 
@@ -30,9 +30,9 @@ Copy the configuration file to ~/.config/strlx/conf, if you want to configure.
 Makefile does this automatically, so compilation is suggested.
  
 ## Compile
-Compilation for Linux, OS X and GNU (Hurd).
-
-<sub>Remember to set CC to your compiler if you aren't using gcc, or clang aliased to "gcc" (Apple...)</sub>
+Compilation for Linux, OS X and the Hurd.
+Remember to set CC to your compiler if you aren't using gcc and your compiler does not provide it. 
+<sub>or clang aliased to "gcc" (Apple...)</sub>
 
 `make && sudo make install && make install-config`
 
@@ -58,4 +58,4 @@ Valid colors are: white, black, dr (dark red), red, yellow, green, cyan, blue, p
 
 Valid fetch items are: string, distro, hostname, kernel, cpu, uptime, memory.
 
-Read the default config file if I didn't explain well enough... I shouldn't have tried to explain
+Read the default config file if I didn't explain well enough.
