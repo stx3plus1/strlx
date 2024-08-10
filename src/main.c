@@ -1,16 +1,15 @@
 // strlx
 // by cirkulx also known as stx3plus1 or stx4
 
-// contains definitions and includes for other headers, required
 #include "main.h"
-
 void basics() {
 	struct passwd *p = getpwuid(getuid());
 	printf("%s@%s\n", p->pw_name, kernel.nodename);
 }
 
 void pstrings(int count, int type, char **value) {
-	int rand = returnrandomnumber(0, istrings);
+	// TODO: Return string instead and remove type integer. This code is bullshit ifs.
+	int rand = returnrandomnumber(0, istrings); // TODO: implement returnrandomnumber() in main.c
 	if (type == 1) {
 		printf("...%s\n", strings[rand]);
 	} else {
@@ -26,10 +25,8 @@ void pstrings(int count, int type, char **value) {
 		}
 	}
 }
-// these functions would be inside main but they are called multiple times, hence printf is embedded.
 void os() {
 	printf("OS: \x1b[0m");
-	// correct bedrock linux release info
 	bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
 	if (bedrockrelease) {
 		char distro[64];
@@ -52,6 +49,7 @@ void os() {
 		}
 	}
 }
+// TODO: abolish all of these useless functions that don't do much and don't hurt to repeat
 void hostname() {
 	printf("Host: \x1b[0m%s\n", kernel.nodename);
 }
@@ -61,6 +59,7 @@ void kernel_ver() {
 void shell() {
 	printf("Shell: \x1b[0m%s\n", getenv("SHELL"));
 }     
+// previous TODO ends here
 void cpu() {
 	cores = sysconf(_SC_NPROCESSORS_ONLN);
 	#ifdef LINUX
@@ -87,8 +86,9 @@ void cpu() {
 	printf("CPU: \x1b[0m%s (%ld)\n", cpuinf, cores);
 	#elif defined(MACOS)
 	char cpuin[256];
-	size_t cpuini = 256;
-    sysctlbyname("machdep.cpu.brand_string", &cpuin, &cpuini, NULL, 0);
+ size_t cpuini = 256;
+	// How the hell does sysctl work again?
+ sysctlbyname("machdep.cpu.brand_string", &cpuin, &cpuini, NULL, 0);
 	printf("CPU: \x1b[0m%s (%ld)\n", cpuin, cores);
 	#endif
 }
@@ -101,6 +101,7 @@ void uptime() {
 		printf("\n");
 	}
 }
+// Are you kidding me? What's happening?
 void memory() {
  	printf("Memory: \x1b[0m");
  	get_memory_info();
@@ -109,17 +110,20 @@ void memory() {
 int main(int argc, char **argv) {
 	if (argc > 1) {
 		if (strcmp(argv[1], "--version") == 0) {
+			// if you fork, please don't remove my name. but i can't make you so well...
 			printf("strlx %s\nBy cirkulx.\n", VERSION);
 			return 0;
 		}
+		// Jesus.
 		if (strstr(argv[1], "-u") || strstr(argv[1], "--help") || strstr(argv[1], "--usage")) {
-			printf("usage: %s [your string here]\nstrlx is a simple yet silly C fetch application for getting system stats.\nExtremely silly...", argv[0]);
+			printf("usage: %s (your string here) [-u]\nstrlx is a simple yet silly C fetch application for getting system stats.\nExtremely silly...", argv[0]);
 			pstrings(argc, 1, argv);
 			return 0;
 		}
 	}
 	uname(&kernel);
 	CONFIG = fopen(strcat(getenv("HOME"), "/.config/strlx/conf"), "r");	
+	// TODO: ASCII here? 
 	if (!CONFIG) {
 		basics();
 		pstrings(argc, 0, argv);
@@ -133,6 +137,7 @@ int main(int argc, char **argv) {
 		return 0;
 	} else {
 		while(fscanf(CONFIG, "%s", word) != EOF) { 
+			// What the hell.
 			if (strstr(word, "ascii-tux")) {
 				ascii_i = tux_i;
 				asctype = 0;
@@ -165,12 +170,14 @@ int main(int argc, char **argv) {
 					}
 				}
 			}
+			// This malfunctions often.
 			if (strstr(word, "color-true")) {
 				color = 1;
 			}
 			if (strstr(word, "color-false")) {
 				color = 0;
 			}
+			// This too.
 			if (color == 1) {
 				if (strstr(word, "white")) {
 					printf("\x1b[37m");
