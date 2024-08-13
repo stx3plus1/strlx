@@ -30,7 +30,7 @@ Compilation works on Linux, GNU and OS X.
 
 Remember to set CC to your compiler if you aren't using gcc and your compiler does not provide it. 
 
-`make && sudo make install`
+`sudo make install`
 
 to compile then add to /usr/local/bin. Add /usr/local/bin to PATH to ensure strlx can bn found after.
 
