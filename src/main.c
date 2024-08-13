@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
 		system("mkdir -p $HOME/.config/strlx");
 		FILE* CONFIGWRT = fopen(CONFPATH, "w");
 		if (!CONFIGWRT) {
-			printf("strlx could not create a configuration file. Check permissions on your home directory.\n");
+			printf("strlx could not create a configuration file. Check permissions on your home directory. (ERROR 0x1)\n");
 			return 0;
 		}
 		int write = 0;
@@ -46,9 +46,9 @@ int main(int argc, char **argv) {
 			write++;
 		}
 		fclose(CONFIGWRT);
-		goto mn;
+		printf("strlx has created a configuration file successfully.\n");
+		return 0;
 	} else {
-		mn:
 		char word[32];
 		while(fscanf(CONFIG, "%s", word) != EOF) {
 			if (strstr(word, "ascii-tux")) {
