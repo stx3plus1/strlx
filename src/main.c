@@ -10,14 +10,17 @@ int returnrand(int lower, int upper) {
 }
 int main(int argc, char **argv) {
 	if (argc > 1) {
-		if (strcmp(argv[1], "--version") == 0) {
-			// if you fork, please don't remove my name. but i can't make you so well...
-			printf("strlx %s\nby stx3plus1.\n", VERSION);
-			return 0;
-		}
-		if (strstr(argv[1], "--help")) {
-			printf("usage: %s [STRING] \nstrlx is a simple program for getting system stats.\n", argv[0]);
-			return 0;
+		int argcycle = 1;
+		while (argcycle < argc) {
+	    	if (!strcmp(argv[argcycle], "--help")) {
+	    		printf("strlx %s\nby stx3plus1.\n\nusage: %s [STRING] [--help] [--version]\nstrlx is a simple program for getting system stats.\n", VERSION, argv[0]);
+	    		return 0;
+		    }
+			if (strstr(argv[argcycle], "--")) {
+				printf("Unkown option: %s\n", argv[argcycle]);
+				return 1;
+			}
+			argcycle++;
 		}
 	}
 	struct utsname kernel;
