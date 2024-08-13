@@ -1,5 +1,2 @@
 .vscode/
-build/
-.DS_Store
-strfetch.c
-a.out
+strlx

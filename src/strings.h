@@ -1,8 +1,35 @@
-
+// strlx
+// by stx3plus1
 #include <stdlib.h>
-// this will be implemented later 
-
-char randomstring[][300] = {
+char strings[][128] = {
+	"i wonder what this button does",
+	"the world will end one day",
+	"time for your psu to blow up",
+	"del System32",
+	"systemd isnt bloatware",
+	"i will delete init rn",
+	"whats that behind you",
+	"mark zuck is the lizard man",
+	"your pc has a cpu",
+	"you shouldnt rm -rf /",
+	"i could like memleak rn",
+	"dude feed me",
+	"ubuntu makes pcs faster, canonical:",
+	"liblzma, xz 5.6.0 and 5.6.1",
+	"ssh wiimote.local",
+    "dd if=/dev/zero of=/dev/sda",
+	"Segmentation Fault",
+	"is your pc case a cardboard box",
+	"pour water on me, im thirsty",
+	"make: *** No rule to make target `src/random.c', needed by `strlx'. Stop.",
+	"Windows 10 on top",
+	"Micro$hit want your data",
+	"int main(int argc, char **argv) {}",
+	"MS-DOS Prompt",
+	"your specs kinda suck im not gonna lie"
+};
+int istrings = (sizeof(strings) / sizeof(strings[0]))-1;
+char informationalstrings[][300] = {
   "Did you know? Command: ls - List directory contents",
   "Why don't some people trust Linux? Because they can't 'window' shop!",
   "Did you know? Command: cd - Change the shell working directory.",
@@ -49,6 +76,5 @@ char randomstring[][300] = {
   "The term 'hack' originally referred to clever solutions or workarounds, but its meaning has evolved over time.",
   "Cybersecurity is the practice of protecting computer systems and networks from unauthorized access, use, disclosure, disruption, modification, or destruction.",
   "The cloud refers to a network of servers that store data and applications accessible from anywhere with an internet connection.",
-// remaining 150 lines lmao
 };
-
+int iinfstrings = (sizeof(informationalstrings) / sizeof(informationalstrings[0]))-1;

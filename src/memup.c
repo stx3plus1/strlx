@@ -1,12 +1,9 @@
-// strfetch 
-// by cirkulx also known as stx3plus1 or stx4
-
-// headers we don't have due to separate files
+// strlx
+// by stx3plus1
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
-
 #ifdef __linux__
 	#include <sys/stat.h>
 	#include <fcntl.h>
@@ -14,8 +11,6 @@
     #include <sys/sysctl.h>
 	#include <mach/mach.h>
 #endif
-
-// uptime
 bool get_system_uptime(long *uptime_seconds) {
 #if defined(__linux__) || defined(__GNU__)
     FILE *file = fopen("/proc/uptime", "r");
@@ -45,8 +40,6 @@ bool get_system_uptime(long *uptime_seconds) {
     return false;
 #endif
 }
-
-// uptime printing
 void format_uptime(long uptime_seconds) {
     int days = uptime_seconds / (60 * 60 * 24);
     int hours = (uptime_seconds % (60 * 60 * 24)) / (60 * 60);
@@ -59,8 +52,6 @@ void format_uptime(long uptime_seconds) {
     }
 	printf("%dm\n", minutes);
 }
-
-// memory
 void get_memory_info() {    
     #ifdef __APPLE__
     int mib[2];
@@ -77,7 +68,7 @@ void get_memory_info() {
     host_page_size(host_port, &pagesize);
     vm_statistics_data_t vm_stat;
     if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS) {
-		printf("Memory calculation error\n");
+		printf("Memory calculation error (ERROR 0xHMX)\n");
         return;
     }
     natural_t mem_used = (vm_stat.active_count + vm_stat.inactive_count + vm_stat.wire_count) * pagesize;
@@ -90,7 +81,7 @@ void get_memory_info() {
     #elif defined(__linux__) || defined(__GNU__)
     FILE *file = fopen("/proc/meminfo", "r");
     if (!file) {
-		printf("Memory calculation error\n");
+		printf("Memory calculation error (ERROR 0xHMM)\n");
         return;
     }
     char line[256];
@@ -110,6 +101,6 @@ void get_memory_info() {
         printf("%.2fMiB / %.2fMiB\n", (double)(total_memory - free_memory) / 1024, (double)total_memory / 1024);
     }
     #else
-    printf("Unsupported\n");
+    printf("Unsupported (ERROR 0xHOW)\n");
     #endif
 }
