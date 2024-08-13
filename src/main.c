@@ -134,7 +134,7 @@ int main(int argc, char **argv) {
 				FILE* bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
 				if (bedrockrelease) {
 					fgets(distro, 63, bedrockrelease);
-					printf("%s", distro);\
+					printf("%s", distro);
 					fclose(bedrockrelease);
 					goto cont;
 				}
