@@ -34,12 +34,12 @@ char conf[13][64] = {
 	"inf blue uptime",
 	"inf purple memory"
 };
-char ascii_tux[][32] = {
+char ascii_tux[][48] = {
 	"\x1b[0m        ",
 	"\x1b[1;30m  .-.   \x1b[0m",
 	"  oo\x1b[1;30m|   \x1b[0m",
 	"\x1b[1;30m /`'\\   \x1b[0m",
-	"\x1b[33m(\\\x1b[1;30m_;\x1b[33m/)  \x1b[0m"
+	"\x1b[1;33m(\\\x1b[1;30m_;\x1b[1;33m/)  \x1b[0m"
 };
 int tux_i = sizeof(ascii_tux) / sizeof(ascii_tux[0]);
 char ascii_apple[][32] = {
