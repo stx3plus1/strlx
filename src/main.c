@@ -46,9 +46,9 @@ int main(int argc, char **argv) {
 			write++;
 		}
 		fclose(CONFIGWRT);
-		printf("strlx has generated a configuration file successfully.\n");
-		return 0;
+		goto mn;
 	} else {
+		mn:
 		char word[32];
 		while(fscanf(CONFIG, "%s", word) != EOF) {
 			if (strstr(word, "ascii-tux")) {
