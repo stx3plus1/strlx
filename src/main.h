@@ -34,21 +34,21 @@ char conf[13][64] = {
 	"inf blue uptime",
 	"inf purple memory"
 };
-char ascii_tux[][16] = {
+char ascii_tux[][32] = {
 	"\x1b[0m        ",
-	"  .-.   ",
+	"\x1b[30m  .-.   \x1b[0m]",
 	"  oo|   ",
-	" /`'\\   ",
-	"(\\_;/)  "
+	"\x1b[30m /`'\\   \x1b[0m",
+	"\x1b[33m(\\_;/)  \x1b[0m"
 };
 int tux_i = sizeof(ascii_tux) / sizeof(ascii_tux[0]);
-char ascii_apple[][16] = {
+char ascii_apple[][32] = {
 	"\x1b[0m          ",
-	"     .    ",
-	"    /|    ",
-	"/######/  ",
-	"######<   ",
-	"\\######\\  ",
-	" \\#####/  "
+	"\033[38;5;034m     .    \x1b[0m",
+	"\033[38;5;226m    ..    \x1b[0m",
+	"\033[38;5;208m........  \x1b[0m",
+	"\033[38;5;196m.......   \x1b[0m",
+	"\033[38;5;129m........  \x1b[0m",
+	"\033[38;5;038m ......   \x1b[0m"
 };
 int apple_i = sizeof(ascii_apple) / sizeof(ascii_apple[0]);
