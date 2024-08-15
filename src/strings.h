@@ -26,7 +26,12 @@ char strings[][128] = {
 	"Micro$hit want your data",
 	"int main(int argc, char **argv) {}",
 	"MS-DOS Prompt",
-	"your specs kinda suck im not gonna lie"
+	"your specs kinda suck im not gonna lie",
+  "is github down again?",
+  "dont tell anyone that 1 + 1 = 3",
+  "Microsoft GNU/Windows",
+  "i do use malloc and i will alloc all your memory",
+  "C++ is kinda bad"
 };
 int istrings = (sizeof(strings) / sizeof(strings[0]))-1;
 char informationalstrings[][300] = {

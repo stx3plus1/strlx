@@ -23,10 +23,10 @@ int main(int argc, char **argv) {
 			argcycle++;
 		}
 	}
-	struct utsname kernel;
 	int ascline = 0;
 	int asctype = 0;
 	int ascii_i;
+	struct utsname kernel;
 	uname(&kernel);
 	char* HOME = getenv("HOME");
 	char* PATH = "/.config/strlx/conf";
