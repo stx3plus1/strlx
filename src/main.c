@@ -29,11 +29,9 @@ int main(int argc, char **argv) {
 	int ascii_i;
 	uname(&kernel);
 	char* HOME = getenv("HOME");
-	char HOMEARRAY[64];
-	strcpy(HOMEARRAY, HOME);
-	char PATH[] = "/.config/strlx/conf";
-	char CONFPATH[128];
-	sprintf(CONFPATH, "%s%s", HOMEARRAY, PATH);
+	char* PATH = "/.config/strlx/conf";
+	char* CONFPATH = malloc(strlen(HOME) + strlen(PATH) + 1);
+	sprintf(CONFPATH, "%s%s", HOME, PATH);
 	FILE* CONFIG = fopen(CONFPATH, "r");	
 	if (!CONFIG) {
 		system("mkdir -p $HOME/.config/strlx");
@@ -239,6 +237,9 @@ int main(int argc, char **argv) {
 	printf("\x1b[0m"); 
 	if (CONFIG) {
 		fclose(CONFIG);
+	}
+	if (CONFPATH) {
+		free(CONFPATH);
 	}
 	return 0;
 }
