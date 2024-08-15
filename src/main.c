@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
 		int argcycle = 1;
 		while (argcycle < argc) {
 	    	if (!strcmp(argv[argcycle], "--help")) {
-	    		printf("strlx %s\nby stx3plus1.\n\nusage: %s [STRING] [--help] [--version]\nstrlx is a simple program for getting system stats.\n", VERSION, argv[0]);
+	    		printf("strlx %s\nby stx3plus1.\n\nusage: %s [STRING] [--help]\nstrlx is a simple program for getting system stats.\n", VERSION, argv[0]);
 	    		return 0;
 		    }
 			if (strstr(argv[argcycle], "--")) {
