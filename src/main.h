@@ -38,7 +38,7 @@ char ascii_tux[][48] = {
 	"\x1b[0m        ",
 	"\x1b[1;30m  .-.   \x1b[0m",
 	"  oo\x1b[1;30m|   \x1b[0m",
-	"\x1b[1;30m /`'\\   \x1b[0m",
+	"\x1b[1;37m /`'\\   \x1b[0m",
 	"\x1b[1;33m(\\\x1b[1;30m_;\x1b[1;33m/)  \x1b[0m"
 };
 int tux_i = sizeof(ascii_tux) / sizeof(ascii_tux[0]);
