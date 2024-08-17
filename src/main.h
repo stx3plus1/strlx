@@ -19,9 +19,10 @@
     #include <sys/sysctl.h>
     #define MACOS
 #endif
-int conf_len = 13;
-char conf[13][64] = {
+int conf_len = 14;
+char conf[14][64] = {
 	"default config for strlx",
+	"",
 	"ascii-tux",
 	"inf bold basics",
 	"reset",
