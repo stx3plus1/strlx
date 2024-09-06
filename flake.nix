@@ -18,7 +18,7 @@
   {
     packages = forAllSystems ({ pkgs, system }: {
       default = pkgs.callPackage ./nix/package.nix { };
-      puppyfetch = self.packages.${system}.default;
+      strlx = self.packages.${system}.default;
     });
 
     devShells = forAllSystems ({ pkgs, system }: {
