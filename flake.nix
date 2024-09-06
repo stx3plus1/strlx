@@ -23,7 +23,7 @@
 
     devShells = forAllSystems ({ pkgs, system }: {
       default =
-        pkgs.callPackage ./nix/shell.nix { inherit (self.packages.${system}) puppyfetch; };
+        pkgs.callPackage ./nix/shell.nix { inherit (self.packages.${system}) strlx; };
     });
   };
 }
