@@ -9,6 +9,6 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/bin
-    cp puppyfetch $out/bin/strlx
+    cp strlx $out/bin/strlx
   '';
 }
