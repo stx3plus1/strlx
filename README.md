@@ -51,3 +51,6 @@ Valid colors are: white, black, dr (dark red, in some shells a bit lighter), red
 Valid items are: string, distro, hostname, shell, kernel, cpu, uptime, memory.
 
 If you have any trouble, delete the configuration file and let strlx recreate it.
+
+for this port do 
+`nix run "github:alexzsk/strlx-port-for-nix" --no-write-lock-file`
