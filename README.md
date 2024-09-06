@@ -1,4 +1,3 @@
 for this port do 
-`nix run "github:alexzsk/strlx-port-for-nix" --no-write-lock-file`
+`nix run "github:alexzsk/strlx-port-for-nix"`
 
-yea i don't even have the lock file :/ soo yeaa...
