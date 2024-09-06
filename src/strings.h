@@ -9,6 +9,7 @@ char strings[][128] = {
     "del System32",
     "systemd isnt bloatware",
     "i will delete init rn",
+    "fun fact if you nix-env the fbi will come to your house /j",
     "whats that behind you",
     "mark zuck is the lizard man",
     "your pc has a cpu",
