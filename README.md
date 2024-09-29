@@ -2,7 +2,7 @@
 A quick "getting started" guide, rewritten partially for 2.0.
 
 ## Basics
-<sub>some setup examples will go here when i have successfully riced my surface pro</sub> 
+<img src=".github/setup.png">
 
 strlx prints a message along with your system information, which can be default or custom.
 
