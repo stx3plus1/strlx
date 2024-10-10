@@ -32,7 +32,7 @@ Remember to set CC to your compiler if you aren't using gcc and your compiler do
 
 `sudo make install`
 
-to compile then add to /usr/local/bin. Add /usr/local/bin to PATH to ensure strlx can bn found after.
+to compile then add to /usr/local/bin. Add /usr/local/bin to PATH to ensure strlx can be found after.
 
 ## Configuration
 
