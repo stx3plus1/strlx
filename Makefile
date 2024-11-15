@@ -1,20 +1,34 @@
+# strlx
+# by stx3plus1
+
 SRC=src
 CC=cc
-CFLAGS=-std=c99 
+SOURCE=$(wildcard src/*.c)
+COMMIT="\"$(shell git rev-parse HEAD | head -c6)\""
+CFLAGS=-O3 -std=c2x -Dcommit=$(COMMIT) 
 
-.PHONY: clean strlx
+UNAME := $(shell uname)
+ifeq ($(UNAME), Darwin)
+    CFLAGS += -framework CoreFoundation -framework IOKit
+endif
 
-strlx: $(SRC)/main.c $(SRC)/memup.c
-	@echo Compiling...
-	$(CC) -o $@ $^ $(CFLAGS)
-	strip $@
-	@echo Done!
+.PHONY: strlx
 
+strlx: ${SOURCE}
+	@echo "[$(CC)] $^ -> $@"
+	@$(CC) -o $@ $^ $(CFLAGS)
+	@strip $@
+
+# run install with sudo/doas.
 install: strlx
-	@echo Installing...
+ifeq ($(UNAME), $(filter $(UNAME) Darwin,FreeBSD))
+	@echo "[in] $< -> /usr/local/bin/$<"
 	@mkdir -p /usr/local/bin
 	@cp $< /usr/local/bin/
-	@echo Done!
+else
+	@echo "[in] $< -> /usr/bin/$<"
+	@cp $< /usr/bin
+endif
 
 clean: 
-	rm strlx
+	@rm -f strlx

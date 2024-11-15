@@ -1,245 +1,308 @@
-// strlx
-// by stx3plus1
+/* 
+ * strlx
+ * by stx3plus1
+ */
 
-#include "main.h"
+#include "include/main.h"
 
-int returnrand(int lower, int upper) {
-	srand(time(0));
-	int number = rand() % (upper - lower + 1) + lower;
-	return number;
-}
-int main(int argc, char **argv) {
-	if (argc > 1) {
-		int argcycle = 1;
-		while (argcycle < argc) {
-	    	if (!strcmp(argv[argcycle], "--help")) {
-	    		printf("strlx %s\nby stx3plus1.\n\nusage: %s [STRING] [--help]\nstrlx is a simple program for getting system stats.\n", VERSION, argv[0]);
+/*
+ * This function is... main.
+ */
+
+int main(int ac, char **av) {
+	// parse arguments.
+	for (int i = 1; i < ac; i++) {
+	    if (strncmp(av[i], "--", 2) == 0) {
+			char* value = av[i] + 2;
+			if (strcmp(value, "help") == 0) {
+				printf("strlx %s-%s\nby stx3plus1.\n\nusage: %s [string] [--help]\nstrlx is a terminal program for displaying system information.\n", VERSION, commit, av[0]);
 	    		return 0;
-		    }
-			if (strstr(argv[argcycle], "--")) {
-				printf("Unkown option: %s\n", argv[argcycle]);
-				return 1;
+			} else {
+				printf("Ignoring unknown option: %s\n", value);
 			}
-			argcycle++;
-		}
+	    }
 	}
-	int ascline = 0;
-	int asctype = 0;
-	int ascii_i;
-	struct utsname kernel;
-	uname(&kernel);
-	char* HOME = getenv("HOME");
-	char* PATH = "/.config/strlx/conf";
-	char* CONFPATH = malloc(strlen(HOME) + strlen(PATH) + 1);
-	sprintf(CONFPATH, "%s%s", HOME, PATH);
-	FILE* CONFIG = fopen(CONFPATH, "r");	
-	if (!CONFIG) {
-		system("mkdir -p $HOME/.config/strlx");
-		FILE* CONFIGWRT = fopen(CONFPATH, "w");
-		if (!CONFIGWRT) {
-			printf("strlx could not create a configuration file. Check permissions on your home directory. (ERROR 0x1)\n");
-			return 0;
-		}
-		int write = 0;
-		while (write < (conf_len)) {
-			fprintf(CONFIGWRT, "%s", conf[write]);
-			fprintf(CONFIGWRT, "\n");
-			write++;
-		}
-		fclose(CONFIGWRT);
-		printf("strlx has created a configuration file successfully.\n");
-		return 0;
+	// configuration loading
+	char* confpath = concat_strings(getenv("HOME"), "/.config/strlx/");
+	FILE* config = generate_open_config("config.json", confpath, conf, conf_len);
+	if (config == NULL) {
+		printf("Error generating configuration file.\n");
 	} else {
-		char word[32];
-		while(fscanf(CONFIG, "%s", word) != EOF) {
-			if (strstr(word, "ascii-tux")) {
-				ascii_i = tux_i;
-				asctype = 0;
-			} else if (strstr(word, "ascii-apple")) {
-				ascii_i = apple_i;
-				asctype = 1;
-			} else {
-				if (!asctype) {
-					ascii_i = tux_i;
-					asctype = 0;
-				}
-			}
-			if (strstr(word, "inf")) {
-				ascline++;
-				if (ascline >= ascii_i) {
-						if (asctype == 0) {
-							printf("%s", ascii_tux[0]);	
-						} else if (asctype == 1) {
-							printf("%s", ascii_apple[0]);	
-						} else {
-							printf("%s", ascii_tux[0]);	
-						}
-				} else {
-					if (asctype == 0) {
-						printf("\x1b[0m%s", ascii_tux[ascline]);
-					} else if (asctype == 1) {
-						printf("\x1b[0m%s", ascii_apple[ascline]);
-					} else {
-						printf("\x1b[0m%s", ascii_tux[ascline]);
-					}
-				}
-			}	
-				if (strstr(word, "white")) {
-					printf("\x1b[37m");
-				}
-				if (strstr(word, "dr")) {
-					printf("\x1b[38;5;9m");
-				}
-				if (strstr(word, "red")) {
-					printf("\x1b[31m");
-				}
-				if (strstr(word, "yellow")) {
-					printf("\x1b[33m");
-				} 
-				if (strstr(word, "green")) {
-					printf("\x1b[32m");
-				} 
-				if (strstr(word, "blue")) {
-					printf("\x1b[34m");
-				} 
-				if (strstr(word, "cyan")) {
-					printf("\x1b[36m");
-				}
-				if (strstr(word, "purple")) {
-					printf("\x1b[35m");
-				}
-			if(strstr(word, "bold")) {
-				printf("\x1b[1m");
-			}
-			if(strstr(word, "basics")) {
-				struct passwd *p = getpwuid(getuid());
-				printf("%s@%s\n", p->pw_name, kernel.nodename);
+		// if a value of colors is -1, it did not load successfully.
+		// this means we should use the default.
+		long int colors[3] = { -1, -1, -1 };
+		char color[24];
+		int asc_i = 0;
+		char* ascii[16]; // you better not have a huge ascii!
+		int asc_sel_i;
+		
+		// rand() needs a seed
+		int buf[2];
+		int ufd = open("/dev/", O_RDONLY);
+		read(ufd, buf, 2);
+		int random = buf[0] + buf[1];
+		srand(random);
 
+		// equivalent of $(uname -a) but separated
+		struct utsname kernel;
+		uname(&kernel);
+
+		char* keys[64], *values[64]; // Get some help if your config is 64 lines long.
+		char* key, *value;
+		int len = parse_json(config, keys, values);
+		for (int i = 0; i < len; i++) {
+			// set key and value from json
+			key = keys[i];
+			value = values[i];
+			
+			// set ascii :>
+			if (!strcmp(key, "ascii")) {
+				if (!strcmp(value, "tux")) {
+					memcpy(ascii, ascii_tux, sizeof(ascii_tux));
+					asc_sel_i = tux_i;
+				} else if (!strcmp(value, "apple")) {
+					memcpy(ascii, ascii_apple, sizeof(ascii_apple));
+					asc_sel_i = apple_i;
+				} else if (!strcmp(value, "freebsd")) {
+					memcpy(ascii, ascii_bsd, sizeof(ascii_bsd));
+					asc_sel_i = 3;
+				}
 			}
-			if(strstr(word, "string")) { 
-				if (argc < 2) {
-					int rand = returnrand(0, istrings);
-					printf("%s\n", strings[rand]);
-				} else {
-					int i = 0;
-					while (i < (argc - 1)) {
-						i++;
-						printf("%s ", argv[i]);
+
+			if (!strcmp(key, "color")) {
+				// set color for stats
+				char seg[3];
+				long int decimal;
+				char* endptr;
+
+				// skip # if user has added one
+				if (*value == '#') value++;
+
+				// convert string into long ints then store in the array
+				for (int i = 0; i < 12 && value[i] != '\0'; i += 2) {
+					strncpy(seg, value + i, 2);
+					seg[2] = '\0';
+					decimal = strtol(seg, &endptr, 16);
+					colors[i / 2] = decimal;
+				}
+				sprintf(color, "\e[0;1;38;2;%ld;%ld;%ldm", colors[0], colors[1], colors[2]);
+			}
+
+			if (!strcmp(key, "inf")) {
+				if (asc_sel_i != 0) {
+					if (asc_i < asc_sel_i) {
+						printf("%s", ascii[asc_i++]);
+					} else {
+						printf("%s", ascii[0]);
 					}
+				}
+
+				if (colors[0] != -1) printf("%s", color);
+				if (!strcmp(value, "syst")) {
+					struct passwd *p = getpwuid(getuid());
+					printf("\e[0;1;4m%s@%s\n\e[0m", p->pw_name, kernel.nodename);
+				} else if (!strcmp(value, "dist")) {
+					printf("System: \e[0m");
+					#if defined(LINUX) || defined(__FreeBSD__)
+					char* distro;
+					FILE* osrelease = fopen("/etc/os-release", "r");
+					if (!osrelease) {
+						printf("%s\n", kernel.sysname);
+					} else {
+						char osline[256];
+						while (fgets(osline, 128, osrelease)) {
+							if (strstr(osline, "PRETTY_NAME")) {
+								distro = strtok(osline, "\"");
+								distro = strtok(NULL, "\"");
+								printf("%s\n", distro);
+								fclose(osrelease);
+								break;
+							}
+						}
+					}
+					#elif defined(MACOS)
+					// Yea I don't fucking get this either alright?
+					CFStringRef path = CFSTR("/System/Library/CoreServices/SystemVersion.plist");
+    				CFURLRef url = CFURLCreateWithFileSystemPath(NULL, path, kCFURLPOSIXPathStyle, false);
+    				CFDataRef resourceData;
+    				SInt32 err;
+    				CFURLCreateDataAndPropertiesFromResource(NULL, url, &resourceData, NULL, NULL, NULL);
+    				CFPropertyListRef plist = CFPropertyListCreateWithData(NULL, resourceData, kCFPropertyListImmutable, NULL, NULL);
+    				CFRelease(resourceData);
+    				CFRelease(url);
+   					if (CFGetTypeID(plist) == CFDictionaryGetTypeID()) {
+        				CFDictionaryRef dict = (CFDictionaryRef)plist;
+        				CFStringRef productName = CFDictionaryGetValue(dict, CFSTR("ProductName"));
+        				CFStringRef productVersion = CFDictionaryGetValue(dict, CFSTR("ProductVersion"));
+        				if (productName && productVersion) {
+            				char name[256];
+            				char version[256];
+            				CFStringGetCString(productName, name, sizeof(name), kCFStringEncodingUTF8);
+            				CFStringGetCString(productVersion, version, sizeof(version), kCFStringEncodingUTF8);
+            				printf("%s %s\n", name, version);
+        				}
+					}
+    				CFRelease(plist);
+					#endif
+				} else if (!strcmp(value, "shll")) {
+					char* shell = strrchr(getenv("SHELL"), '/');
+					shell++;
+					printf("Shell: \e[0m%s\n", shell);
+				} else if (!strcmp(value, "krnl")) {
+					printf("Kernel: \e[0m%s - version %s on %s\n", kernel.sysname, kernel.release, kernel.machine);
+				} else if (!strcmp(value, "proc")) {
+					char* cpuinfo;
+					long int cores = sysconf(_SC_NPROCESSORS_ONLN);
+					printf("CPU: \e[0m");
+					#ifdef LINUX
+					int found;
+					FILE* prccpuinfo = fopen("/proc/cpuinfo", "r");
+					if (!prccpuinfo) {
+						printf("%ld cores\n", cores);
+						goto cont2;
+					}
+					char cpuline[256];
+					char* cpuinf;
+					while(fgets(cpuline, 255, prccpuinfo)) {
+						if (strstr(cpuline, "model name")) {
+							found++;
+							cpuinf = strtok(cpuline, ":");
+							cpuinf = strtok(NULL, ":");
+							cpuinf++;
+							cpuinf[strlen(cpuinf)-1] = '\0';
+							break;
+						}
+					}
+					if (set != 1) {
+						printf("%ld cores\n", cores);
+						fclose(prccpuinfo);
+					} else {
+						printf("%s, %ld cores\n", cpuinf, cores);
+						fclose(prccpuinfo);
+					}
+					#elif defined(MACOS)
+					char cpuin[256];
+					size_t cpuini = 256;
+					sysctlbyname("machdep.cpu.brand_string", &cpuin, &cpuini, NULL, 0);
+					printf("%s, %ld cores\n", cpuin, cores);
+					#elif defined(FREEBSD)
+					printf("bruh. (%ld cores)\n", cores);
+					#endif
+				} else if (!strcmp(value, "gpro")) {
+					printf("GPU: \e[0m");
+					#ifdef LINUX
+					#elif defined(MACOS)
+					CFMutableDictionaryRef matchingDict = IOServiceMatching("IOPCIDevice");
+    				io_iterator_t iter;
+    				IOServiceGetMatchingServices(kIOMainPortDefault, matchingDict, &iter);
+    				io_object_t service;
+    				while ((service = IOIteratorNext(iter)) != 0) {
+        				CFTypeRef model = IORegistryEntryCreateCFProperty(service, CFSTR("model"), kCFAllocatorDefault, 0);
+       					if (model) {
+            				const unsigned char *model_str = CFDataGetBytePtr((CFDataRef)model);
+            				printf("%s\n", model_str);
+            				CFRelease(model);
+            				IOObjectRelease(service);
+            				break; 
+        				}
+        				IOObjectRelease(service);
+    				}
+    				IOObjectRelease(iter);
+					#elif defined(FREEBSD)
 					printf("\n");
+					#endif
+				} else if (!strcmp(value, "uptm")) {
+					long uptime_seconds = 0;
+					printf("Uptime: \e[0m");
+					if (get_system_uptime(&uptime_seconds)) {
+						format_uptime(uptime_seconds);
+					} else { 
+						printf("Failure getting uptime info.\n"); 
+					}
+				} else if (!strcmp(value, "memr")) {
+					printf("Memory: \e[0m");
+					#ifdef LINUX
+					// Not implemented :P
+					// TODO Add Linux memory, CPU, GPU
+					#elif defined(MACOS)
+					uint64_t total_memory;
+					size_t len = sizeof(total_memory);
+					sysctlbyname("hw.memsize", &total_memory, &len, NULL, 0);
+
+					mach_port_t host_port;
+  					mach_msg_type_number_t host_size;
+  					vm_size_t pagesize;
+  					host_port = mach_host_self();
+  					host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+  					host_page_size(host_port, &pagesize);
+  					vm_statistics64_data_t vmstat;
+
+					host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vmstat, &host_size);
+					uint64_t used_memory = (
+						+ vmstat.active_count
+        				+ vmstat.inactive_count
+        				+ vmstat.speculative_count
+        				+ vmstat.wire_count
+        				+ vmstat.compressor_page_count
+       					- vmstat.purgeable_count
+        				- vmstat.external_page_count * pagesize);
+					printf("%.2llu MiB / %.2llu MiB\n", used_memory / 1024, total_memory / (1024 * 1024));
+					#elif defined(FREEBSD)
+					// TODO Add FreeBSD memory, CPU, GPU, uptime
+					printf("\n");
+					#endif
 				}
-			}
-			if(strstr(word, "distro")) {
-				char* distro;
-				printf("OS: \x1b[0m");
-				FILE* bedrockrelease = fopen("/bedrock/etc/bedrock-release", "r");
-				if (bedrockrelease) {
-					fgets(distro, 63, bedrockrelease);
-					printf("%s", distro);
-					fclose(bedrockrelease);
-					goto cont;
-				}
-				FILE* osrelease = fopen("/etc/os-release", "r");
-				if (!osrelease) {
-					printf("%s\n", kernel.sysname);
-					goto cont; 
-				}
-				char osline[256];
-				while (fgets(osline, 128, osrelease)) {
-					if (strstr(osline, "PRETTY_NAME")) {
-						distro = strtok(osline, "\"");
-						distro = strtok(NULL, "\"");
-						printf("%s\n", distro);
-						fclose(osrelease);
-						goto cont; 
+			} else if (!strcmp(key, "mis")) {
+				if (asc_sel_i != 0) {
+					if (asc_i < asc_sel_i) {
+						printf("%s", ascii[asc_i++]);
+					} else {
+						printf("%s", ascii[0]);
 					}
 				}
-			}
-			cont:
-			if(strstr(word, "hostname")) { 
-				printf("Host: \x1b[0m%s\n", kernel.nodename);
-			}
-			if(strstr(word, "kernel")) { 
-				printf("Kernel: \x1b[0m%s %s %s\n", kernel.sysname, kernel.release, kernel.machine);
-			}
-			if(strstr(word, "shell")) { 
-				printf("Shell: \x1b[0m%s\n", getenv("SHELL"));
-			}
-			if(strstr(word, "cpu")) {
-				char* cpuinfo;
-				long int cores = sysconf(_SC_NPROCESSORS_ONLN);
-				#ifdef LINUX
-				int set = 0;
-				FILE* prccpuinfo = fopen("/proc/cpuinfo", "r");
-				if (!prccpuinfo) {
-					printf("CPU: \x1b[0m(%ld)\n", cores);
-					goto cont2;
+				// misc
+				if (!strcmp(value, "separator")) {
+					printf("\e[0m= = = = = = = = = = = = =\n");
 				}
-				char cpuline[256];
-				char* cpuinf;
-				while(fgets(cpuline, 255, prccpuinfo)) {
-					if (strstr(cpuline, "model name")) {
-						set = 1;
-						cpuinf = strtok(cpuline, ":");
-						cpuinf = strtok(NULL, ":");
-						cpuinf++;
-						cpuinf[strlen(cpuinf)-1] = '\0';
-						break;
+			} else if (!strcmp(key, "str")) {
+				if (asc_i < asc_sel_i) {
+					printf("%s", ascii[asc_i++]);
+				} else {
+					printf("%s", ascii[0]);
+				}
+				// string
+				if (ac > 1) {
+					for (int i = 1; i < ac; i++) printf("%s ", av[i]);
+					printf("\n");
+				} else if ((fseek(stdin, 0, SEEK_END), ftell(stdin)) > 0) {
+					rewind(stdin);
+					char buf[256];
+  					read(0, buf, 256);
+					printf("%s", buf);
+				} else {
+					if (!strcmp(value, "silly")) {
+						printf("\"%s\"\n", strings[rand() % istrings]);
+					} else if (!strcmp(value, "info-jokes")) {
+						printf("%s\n", informationalstrings[rand() % iinfstrings]);
+					}
+				} 
+			} else if (!strcmp(key, "pri")) {
+				if (asc_sel_i != 0) {
+					if (asc_i < asc_sel_i) {
+						printf("%s", ascii[asc_i++]);
+					} else {
+						printf("%s", ascii[0]);
 					}
 				}
-				if (set == 0) {
-					printf("CPU: \x1b[0m(%ld)\n", cores);
-					fclose(prccpuinfo);
-					goto cont2;
-				}
-				printf("CPU: \x1b[0m%s (%ld)\n", cpuinf, cores);
-				fclose(prccpuinfo);
-				#elif defined(MACOS)
-				char cpuin[256];
-			 	size_t cpuini = 256;
-				sysctlbyname("machdep.cpu.brand_string", &cpuin, &cpuini, NULL, 0);
-				printf("CPU: \x1b[0m%s (%ld)\n", cpuin, cores);
-				#endif
-				goto cont2;
+
+				printf("\e[1m%s\n", value);
 			}
-			cont2:
-			if(strstr(word, "uptime")) { 
-				long uptime_seconds = 0;
-				printf("Uptime: \x1b[0m");
-				if (get_system_uptime(&uptime_seconds)) {
-   					format_uptime(uptime_seconds); 
-			 	} else {
-					printf("Not long enough :P (ERROR 0xHUH)\n");
-				}
-			}
-			if(strstr(word, "memory")) { 
-				 	printf("Memory: \x1b[0m");
- 					get_memory_info();
-			}
-			if(strstr(word, "reset")) {
-				printf("\x1b[0m");
-			}
-		} 
- 	}
-	if (ascline < ascii_i) {
-		while (ascline < ascii_i - 1) {
-			ascline++;
-			if (asctype == 0) {
-				printf("\x1b[0m%s", ascii_tux[ascline]);
-			} else if (asctype == 1) {
-				printf("\x1b[0m%s", ascii_apple[ascline]);
-			} else {
-				printf("\x1b[0m%s", ascii_tux[ascline]);
-			}
-			printf("\n");
+			// Free from the malloc in parse_json()
+			free(keys[i]);
+			free(values[i]);
 		}
-	}
-	printf("\x1b[0m"); 
-	if (CONFIG) {
-		fclose(CONFIG);
-	}
-	if (CONFPATH) {
-		free(CONFPATH);
-	}
+ 	}
+	printf("\x1b[0m");
+	if (config) fclose(config); 
 	return 0;
 }
