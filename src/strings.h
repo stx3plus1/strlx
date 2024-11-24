@@ -17,7 +17,7 @@ char strings[][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-    "dd if=/dev/zero of=/dev/sda",
+    	"dd if=/dev/zero of=/dev/sda",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
@@ -27,11 +27,13 @@ char strings[][128] = {
 	"int main(int argc, char **argv) {}",
 	"MS-DOS Prompt",
 	"your specs kinda suck im not gonna lie",
-  "is github down again?",
-  "dont tell anyone that 1 + 1 = 3",
-  "Microsoft GNU/Windows",
-  "i do use malloc and i will alloc all your memory",
-  "C++ is kinda bad"
+  	"is github down again?",
+  	"dont tell anyone that 1 + 1 = 3",
+  	"Microsoft GNU/Windows",
+  	"i do use malloc and i will alloc all your memory",
+  	"C++ is kinda bad",
+	"gcc: critical error: strlx.c: No file or folder. compilation aborted.",
+	"rm -fr /* doesnt delete the french language packs"
 };
 int istrings = (sizeof(strings) / sizeof(strings[0]))-1;
 char informationalstrings[][300] = {
