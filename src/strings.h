@@ -17,7 +17,7 @@ char strings[][128] = {
 	"ubuntu makes pcs faster, canonical:",
 	"liblzma, xz 5.6.0 and 5.6.1",
 	"ssh wiimote.local",
-    	"dd if=/dev/zero of=/dev/sda",
+        "dd if=/dev/zero of=/dev/sda",
 	"Segmentation Fault",
 	"is your pc case a cardboard box",
 	"pour water on me, im thirsty",
