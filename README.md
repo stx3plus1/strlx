@@ -1,6 +1,3 @@
-# Version 2.0 is not supported!
-## 3.0 release will be within a couple of weeks.
-
 # strlx
 A quick "getting started" guide, rewritten partially for 2.0.
 
