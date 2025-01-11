@@ -42,7 +42,7 @@ The ASCII logo is set with the "ascii" key - which can be "apple" or "tux". 3.0 
 
 The color is set with the "color" key, which is any hex encoded RGB color with or without a # symbol.
 
-"items" contains your items to fetch with. This is where you put all "inf", "mis", or "pri" items.
+"items" contains your items to fetch with. This is where you put all "inf" or "pri" items.
 
 "mis" has a separator - which you can use to separate the hardware and software, for example.
 
@@ -60,7 +60,7 @@ The color is set with the "color" key, which is any hex encoded RGB color with o
 
 - proc (Intel Core iX, AMD Ryzen X, ...)
 
-- gpro (Intel UHD Graphics... (please fund me new hardware) )
+- gpro (not implemented)
 
 - uptm (5h 10m...)
 
