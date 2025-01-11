@@ -94,7 +94,7 @@ char strings[][128] = {
 	"your specs kinda suck im not gonna lie",
 	"is github down again?",
 	"dont tell anyone that 1 + 1 = 3",
-	"1 + 1 is not 3 dont listen to the other guy"
+	"1 + 1 is not 3 dont listen to the other guy",
 	"i will allocate all your ram"
 };
 int istrings = (sizeof(strings) / sizeof(strings[0]))-1;
