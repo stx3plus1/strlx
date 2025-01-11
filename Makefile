@@ -3,9 +3,9 @@
 
 SRC=src
 CC=cc
-SOURCE=$(wildcard src/*.c)
+SOURCE=$(wildcard $(SRC)/*.c)
 COMMIT="\"$(shell git rev-parse HEAD | head -c6)\""
-CFLAGS=-O3 -std=c2x -Dcommit=$(COMMIT) 
+CFLAGS=-w -O3 -std=c2x -Dcommit=$(COMMIT) 
 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)

@@ -1,5 +1,5 @@
 /*
- * JSON configuration Parser
+ * JSON configuration parser
  * by stx3plus1
  */
 
@@ -27,7 +27,7 @@ FILE* generate_open_config(char* file, char* directory, char* conf[], int conf_l
 	FILE* CONFIG = fopen(concat_strings(directory, file), "ro");
 	if (!CONFIG) {
 		mkdir(directory, 0700);
-		CONFIG = fopen(file, "w");
+		CONFIG = fopen(concat_strings(directory, file), "w");
 		if (!CONFIG) {
 			return NULL;
 		}
@@ -37,7 +37,7 @@ FILE* generate_open_config(char* file, char* directory, char* conf[], int conf_l
 			fprintf(CONFIG, "\n");
 		}
 		fclose(CONFIG);
-		CONFIG = fopen(file, "ro");
+		CONFIG = fopen(concat_strings(directory, file), "ro");
 		return CONFIG;
 	} else {
 		return CONFIG;
@@ -47,6 +47,9 @@ FILE* generate_open_config(char* file, char* directory, char* conf[], int conf_l
 /*
  * This function inputs a JSON config and outputs raw tokens that the main 
  * function can strcmp() and show the system information from.
+ *
+ * I wrote this while tired as fuck. I don't understand this shit. 
+ * But it works. It works. I'm leaving it.
  *
  * config - FILE* which is a JSON configuration for the program
  * keys, values - outputs values parsed by main
@@ -64,13 +67,17 @@ int parse_json(FILE* config, char* keys[], char* values[]) {
 		char* ptr = line;
 		while (*ptr == ' ' || *ptr == '\t') ptr++;
 		if (*ptr == '{' || *ptr == '}') continue;
+		if (*ptr == ']') {
+			strcpy(key, "end");
+			strcpy(value, "array");
+		}
 		if (*ptr == '\"') {
 			ptr++;
 			char* key_start = ptr;
 			while (*ptr != '\"' && *ptr) ptr++;
 			strncpy(key, key_start, ptr - key_start);
-			key[ptr - key_start] = '\0';
-			
+			key[ptr - key_start] = '\0';	
+			 
 			ptr++;
 
 			while (*ptr && *ptr != '\"' && *ptr != '[') ptr++;
@@ -82,16 +89,16 @@ int parse_json(FILE* config, char* keys[], char* values[]) {
 				value[ptr - value_start] = '\0';
 			} else if (*ptr == '[') {
 				// This is a bit of a hack but it works.
-				strncpy(value, "array\0", 6);
+				strcpy(value, "array");
 			}
-			char* keyout = malloc(sizeof(char) * (strlen(key) + 1));
-			sprintf(keyout, "%s", key);
-			keys[i++] = keyout;
-			char* valout = malloc(sizeof(char) * (strlen(value) + 1));
-			sprintf(valout, "%s", value);
-			values[i - 1] = valout; // for some reason this is correct.
-			tok_len++;
 		}
+		char* keyout = malloc(sizeof(char) * (strlen(key) + 1));
+		sprintf(keyout, "%s", key);
+		keys[i++] = keyout;
+		char* valout = malloc(sizeof(char) * (strlen(value) + 1));
+		sprintf(valout, "%s", value);
+		values[i - 1] = valout; 
+		tok_len++;
 	}
 	return tok_len;
 }

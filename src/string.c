@@ -1,5 +1,5 @@
 /*
- * Safe string concatenation function.
+ * Safe string concatenation.
  * by stx3plus1
  */ 
 
@@ -15,7 +15,7 @@
  */
 
 char* concat_strings(char* str1, char* str2) {
-	//char* ret = malloc(strlen(str1) + strlen(str2) + 1);
-	strcat(str1, str2);
-	return str1;
+	char* ret = malloc(strlen(str1) + strlen(str2) + 1);
+	sprintf(ret, "%s%s", str1, str2);
+	return ret;
 }
