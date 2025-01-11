@@ -24,7 +24,7 @@ You can install it properly by copying it to /usr/local/bin (`sudo cp strlx /usr
 strlx will automatically write a configuration file on first run and you can modify this later.
 
 ## Compile
-Compilation works on Linux, GNU and OS X.
+strlx is designed for Linux. Success on Linux-like operating systems CAN happen, but macOS is no longer supported.
 
 Remember to set CC to your compiler if you aren't using gcc and your compiler does not provide it. 
 
@@ -38,13 +38,11 @@ strlx looks in `~/.config/strlx/config.json`, where ~ is the home directory.
 
 ### The file works like this:
 
-The ASCII logo is set with the "ascii" key - which can be "apple" or "tux". 3.0 revisions will introduce more and an auto option!
+The ASCII logo is set with the "ascii" key - which can be "apple", "tux" or "auto". 3.0 revisions will introduce more!
 
 The color is set with the "color" key, which is any hex encoded RGB color with or without a # symbol.
 
 "items" contains your items to fetch with. This is where you put all "inf" or "pri" items.
-
-"mis" has a separator - which you can use to separate the hardware and software, for example.
 
 "pri" allows you to print preset custom messages, the only input is the text in the key option.
 
@@ -52,15 +50,13 @@ The color is set with the "color" key, which is any hex encoded RGB color with o
 
 - syst (user@localhost)
 
-- dist (macOS 15.0.1, Arch Linux, ...)
+- dist (Arch Linux, ...)
 
-- krnl (Linux, Darwin, version X)
+- krnl (Linux, version X)
 
 - shll (bash, zsh...)
 
 - proc (Intel Core iX, AMD Ryzen X, ...)
-
-- gpro (not implemented)
 
 - uptm (5h 10m...)
 
