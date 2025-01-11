@@ -76,7 +76,9 @@ int main(int ac, char **av) {
 				long int decimal;
 				char* endptr;
 
-				if (strlen(value) < 6) continue;
+				if ((*value != '#' && strlen(value) < 6) || (*value == '#' && strlen(value) < 7)) {
+					printf("invalid color code %s\n", value);
+				}
 
 				// skip # if user has added one
 				if (*value == '#') value++;
@@ -170,13 +172,13 @@ int main(int ac, char **av) {
 					printf("Uptime: \e[0m");
 					FILE *file = fopen("/proc/uptime", "r");
     				if (file == NULL) {
-						printf("\n");
+						printf("Failure getting uptime information.\n");
 						continue;
 					}
 					double uptime;
     				if (fscanf(file, "%lf", &uptime) != 1) {
         				fclose(file);
-						printf("\n");
+						printf("Failure getting uptime information.\n");
 						continue;
     				}
     				fclose(file);
@@ -192,7 +194,7 @@ int main(int ac, char **av) {
 					printf("Memory: \e[0m");
 					FILE* meminfo = fopen("/proc/meminfo", "r");
 					if (!meminfo) {
-						printf("\n");
+						printf("Could not open memory information.\n");
 						continue;
 					}
 					char line[64];
@@ -206,17 +208,14 @@ int main(int ac, char **av) {
 						if (!strncmp(line, availstr, strlen(availstr))) {
 							sscanf(line, "MemAvailable: %ld kB", &avail);
 						}
-
 					}
-					printf("%.2f GiB / %.2f GiB\n", (total - avail)/1048576.0, total/1048576.0);
+
 					fclose(meminfo);
-				}
-			} else if (!strcmp(key, "mis")) {
-				if (asc_sel_i != 0) {
-					if (asc_i < asc_sel_i) {
-						printf("%s", ascii[asc_i++]);
+
+					if (total == -1 || avail == -1) {
+						printf("Failure reading memory information.");
 					} else {
-						printf("%s", ascii[0]);
+						printf("%.2f GiB / %.2f GiB\n", (total - avail)/1048576.0, total/1048576.0);
 					}
 				}
 			} else if (!strcmp(key, "str")) {
