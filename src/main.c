@@ -213,7 +213,7 @@ int main(int ac, char **av) {
 					fclose(meminfo);
 
 					if (total == -1 || avail == -1) {
-						printf("Failure reading memory information.");
+						printf("Failure reading memory information.\n");
 					} else {
 						printf("%.2f GiB / %.2f GiB\n", (total - avail)/1048576.0, total/1048576.0);
 					}
