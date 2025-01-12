@@ -40,7 +40,7 @@ int main(int ac, char **av) {
 
 		int entered_items;
 	
-		int random = brand();
+		int random = brand() * time(0);
 		srand(random);
 
 		// equivalent of $(uname -a) but separated
