@@ -11,7 +11,7 @@ strlx prints a message along with your system information by default.
 
 strlx will display your string in the information. If there is none parsed, a random (sometimes a bit odd) default will show.
 
-Strings do not require quotes - strlx prints the entirely of argv - but using them is good practice. 
+Strings do not require quotes - strlx prints the entirety of argv - but using them is good practice. 
 
 ## Installation
 
@@ -19,22 +19,22 @@ There are 2 methods for installation - compiling manually, or grabbing the lates
 
 Run `chmod +x <the executable>` to mark it as executable, if you cannot run it (ex  [shell] - Killed    [shell]: permission denied).
 
-You can install it properly by copying it to /usr/local/bin (`sudo cp strlx /usr/local/bin`)
+You can install properly by copying it to /usr/local/bin (`sudo cp strlx /usr/local/bin`)
 
-strlx will automatically write a configuration file on first run and you can modify this later.
+strlx will automatically write a configuration file on first run (which is defined in src/include/main.h, btw)
 
 ## Compile
-strlx is designed for Linux. Success on Linux-like operating systems CAN happen, but macOS is no longer supported.
+strlx is designed for Linux and very similar Linux like systems. Not UNIX-like or compliant OSes in general, keep in mind.
 
 Remember to set CC to your compiler if you aren't using gcc and your compiler does not provide it. 
 
 `sudo make install`
 
-to compile then add to /usr/local/bin. Add /usr/local/bin to PATH to ensure strlx can be found after.
+to compile then add to /usr/bin/. Make sure /usr/bin is in PATH to ensure strlx can be found in your shell.
 
 ## Configuration
 
-strlx looks in `~/.config/strlx/config.json`, where ~ is the home directory.
+strlx looks for your config in  `~/.config/strlx/config.json`, where ~ is the home directory, or makes one if it doesn't exist.
 
 ### The file works like this:
 
