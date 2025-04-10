@@ -170,7 +170,7 @@ int main(int ac, char **av) {
 					printf("GPU: \e[0mNot implemented.\n");
 				} else if (!strcmp(value, "uptm")) {
 					printf("Uptime: \e[0m");
-					FILE *file = fopen("/proc/uptime", "r");
+					FILE* file = fopen("/proc/uptime", "r");
     				if (file == NULL) {
 						printf("Failure getting uptime information.\n");
 						continue;
@@ -178,8 +178,8 @@ int main(int ac, char **av) {
 					double uptime;
     				if (fscanf(file, "%lf", &uptime) != 1) {
         				fclose(file);
-						printf("Failure getting uptime information.\n");
-						continue;
+            printf("Failure getting uptime information.\n");
+										  continue;
     				}
     				fclose(file);
     				long uptime_seconds = (long)uptime;
@@ -231,7 +231,7 @@ int main(int ac, char **av) {
 				} else if ((fseek(stdin, 0, SEEK_END), ftell(stdin)) > 0) {
 					rewind(stdin);
 					char buf[256];
-  					(void)read(0, buf, 256);
+  			(void)read(0, buf, 256);
 					printf("%s", buf);
 				} else {
 					if (!strcmp(value, "silly")) {
